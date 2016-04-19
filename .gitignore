@@ -1,3 +1,7 @@
+node_modules/
+gitSpy/*
+
+
 ### node etc ###
 
 # Logs

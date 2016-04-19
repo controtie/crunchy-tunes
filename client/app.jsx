@@ -63,6 +63,14 @@ class App extends React.Component {
       });
   }
 
+  callFBLogin() {
+    FB.login();
+  }
+
+  callFBLogout () {
+    FB.logout();
+  }
+
   render() {
     return (
       <div>
@@ -76,8 +84,9 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer track = {this.state.currentTrack} />
-            <Button label="Sign Up!" style={{color: 'white', paddingLeft: '45px' }} />
-            <Button label="Sign In!" style={{color: 'white' }} />   
+            <Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> 
+            <Button label="Log Out!" style={{color: 'white' }} onClick={this.callFBLogout} /> 
+
           </AppBar>
           <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
           <CardsContainer tracks = {this.state.tracks}

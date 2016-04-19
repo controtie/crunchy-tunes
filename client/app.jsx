@@ -31,7 +31,6 @@ class App extends React.Component {
     queryAll({ query: 'Kanye',
       })
       .then((results) => {
-        console.log(results);
         self.setState({
           tracks: results,
         });
@@ -71,6 +70,18 @@ class App extends React.Component {
     FB.logout();
   }
 
+  listen() {
+    var host = location.origin.replace(/^http/, 'ws') + '/binary-endpoint'
+    var client = new BinaryClient(host);
+    client.on('stream', function(stream, meta) {
+      console.log('streaming...');
+    })
+  }
+
+  broadcast() {
+
+  }
+
   render() {
     return (
       <div>
@@ -86,7 +97,8 @@ class App extends React.Component {
             <SongPlayer track = {this.state.currentTrack} />
             <Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> 
             <Button label="Log Out!" style={{color: 'white' }} onClick={this.callFBLogout} /> 
-
+            <Button label="listen!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.listen} />
+            <Button label="broadcast!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.broadcast} /> 
           </AppBar>
           <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
           <CardsContainer tracks = {this.state.tracks}

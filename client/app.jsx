@@ -85,6 +85,11 @@ class App extends React.Component {
     }
   }
 
+  login(user) {
+    this.setState({loggedIn: true});
+    socket.emit('login', user);
+  }
+
   render() {
     var pageLayout;
     if (this.state.page === 'tracks') {
@@ -107,7 +112,7 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer track = {this.state.currentTrack} />
-            <Facebook />
+            <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
           </AppBar>
           {pageLayout}

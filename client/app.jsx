@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './nav.js';
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
+import UsersContainer from './UsersContainer.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import queryAll from './queryAll.js';
@@ -23,6 +24,8 @@ class App extends React.Component {
         apiSource: 'test',
       },
       searching: false,
+      loggedIn: false,
+      listeningTo: null
     };
   }
 
@@ -41,6 +44,12 @@ class App extends React.Component {
     this.setState({
       currentTrack: track,
     });
+  }
+
+  pickUser(user) {
+    this.setState({
+      listeningTo: user
+    })
   }
 
   handleSearch(value) {
@@ -70,14 +79,6 @@ class App extends React.Component {
     FB.logout();
   }
 
-  listen() {
-    var host = location.origin.replace(/^http/, 'ws') + '/binary-endpoint'
-    var client = new BinaryClient(host);
-    client.on('stream', function(stream, meta) {
-      console.log('streaming...');
-    })
-  }
-
   broadcast() {
 
   }
@@ -97,8 +98,7 @@ class App extends React.Component {
             <SongPlayer track = {this.state.currentTrack} />
             <Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> 
             <Button label="Log Out!" style={{color: 'white' }} onClick={this.callFBLogout} /> 
-            <Button label="listen!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.listen} />
-            <Button label="broadcast!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.broadcast} /> 
+            <Button label="Simon Says!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.broadcast} /> 
           </AppBar>
           <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
           <CardsContainer tracks = {this.state.tracks}

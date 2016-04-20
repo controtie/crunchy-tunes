@@ -4,7 +4,6 @@ import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox
 import ClassNames from 'classnames';
 import style from './styles/toolbox-theme';
 
-
 const CardsContainer = ({ tracks, handleCardPlay }) => {
   let cards = tracks.map((track) =>
     <Card onClick={() => handleCardPlay(track)}
@@ -16,9 +15,8 @@ const CardsContainer = ({ tracks, handleCardPlay }) => {
         <CardTitle
           className={ClassNames(style['source-logo'])}
           avatar= {
-            track.apiSource === 'Spotify' ? 'http://www.iconarchive.com/download/i98446/dakirby309/simply-styled/Spotify.ico' :
-              track.apiSource === 'SoundCloud' ? 'https://c1.staticflickr.com/9/8082/8292777643_65090144e9.jpg' :
-                'https://cdn0.iconfinder.com/data/icons/social-networks-and-media-flat-icons/136/Social_Media_Socialmedia_network_share_socialnetwork_network-30-512.png'
+            track.apiSource === 'SoundCloud' ? 'https://c1.staticflickr.com/9/8082/8292777643_65090144e9.jpg' :
+              'https://cdn0.iconfinder.com/data/icons/social-networks-and-media-flat-icons/136/Social_Media_Socialmedia_network_share_socialnetwork_network-30-512.png'
           }
         />
         <CardMedia
@@ -41,5 +39,3 @@ const CardsContainer = ({ tracks, handleCardPlay }) => {
 };
 
 export default CardsContainer;
-
-

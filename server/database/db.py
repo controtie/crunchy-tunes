@@ -7,8 +7,9 @@ conn = sqlite3.connect('test.db');
 print 'Opened database successfully!';
 
 conn.execute('''CREATE TABLE Users
-  (ID INT PRIMARY KEY NOT NULL,
+  (ID INTEGER PRIMARY KEY,
   fbID INT NOT NULL UNIQUE, 
+  avatar TEXT,
   name TEXT NOT NULL);
   ''');
 

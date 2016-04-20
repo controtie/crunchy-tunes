@@ -3,6 +3,9 @@
 import sys
 import sqlite3
 
+print "We've called this script! args1 is", sys.argv[1];
+sys.stdout.flush();
+
 conn = sqlite3.connect('test.db')
 
 if sys.argv[1] == 'POST':
@@ -13,11 +16,12 @@ if sys.argv[1] == 'POST':
   conn.execute(stmt);
   conn.commit()
   print 'success'
-  conn.close()
   sys.stdout.flush();
+  conn.close()
 
 
 if sys.argv[1] == 'GET':
+  print 'inside GET!'
   fbID   = sys.argv[2]
   stmt   = 'SELECT * from Users where fbID={}'.format(sys.argv[2])
   print stmt

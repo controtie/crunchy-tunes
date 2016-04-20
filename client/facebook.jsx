@@ -7,8 +7,6 @@ class Facebook extends React.Component {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-
-
     this.state = {
       loggedin: false,
     };
@@ -55,9 +53,14 @@ class Facebook extends React.Component {
   fetchUserInfo() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
-      console.log(response);
       console.log('Successful login for: ', response);
-    });
+      var user = {
+        name: response.name,
+        fbID: response.id,
+        avatar: response.picture.data.url
+      }
+      this.props.login(user);
+    }.bind(this));
     this.setState({ loggedin: true });
   }
 

@@ -31,7 +31,7 @@ class App extends React.Component {
       page: 'tracks'
     };
     socket.on('users', function(users) {
-      console.log('new users -- ', users);
+      console.log('new users - ', users);
     })
   }
 

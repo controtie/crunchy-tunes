@@ -5,6 +5,9 @@ import Button from 'react-toolbox/lib/button';
 class Facebook extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+
+
     this.state = {
       loggedin: false,
     };
@@ -31,9 +34,9 @@ class Facebook extends React.Component {
       //    your app or not.
       //
       // These three cases are handled in the callback function.
-      FB.getLoginStatus(function (response) {
-        this.statusChangeCallback(response);
-      }.bind(this));
+      // FB.getLoginStatus(function (response) {
+      //   this.statusChangeCallback(response);
+      // }.bind(this));
     }.bind(this);
 
     // Load the SDK asynchronously
@@ -53,14 +56,11 @@ class Facebook extends React.Component {
     FB.api('/me', function(response) {
     console.log('Successful login for: ' + response.name);
     });
-          // Logged into your app and Facebook.
     this.setState({ loggedin: true });
   }
 
   // This is called with the results from from FB.getLoginStatus().
   statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -69,19 +69,13 @@ class Facebook extends React.Component {
       this.fetchUserInfo();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-      'into Facebook.';
     }
   }
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
+  // This function is called when someone finishes with the Login Button.
   checkLoginState() {
     FB.getLoginStatus(function(response) {
       this.statusChangeCallback(response);
@@ -89,15 +83,28 @@ class Facebook extends React.Component {
   }
 
   handleClick() {
-    FB.login(this.checkLoginState());
+    FB.login((response) => {
+      FB.getLoginStatus(() => {
+        this.statusChangeCallback(response);
+      });
+    });
   }
 
 
   render() {
-    return (
-      <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /> </div>
-    );
+    if (this.state.loggedin) {
+      return (
+        <div><Button label="Log Out!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /></div>
+      );
+    } else {
+      return (
+        <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /></div>
+      );
+    }
   }
 }
+
+// <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /></div>
+
 
 export default Facebook;

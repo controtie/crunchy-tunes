@@ -24,6 +24,7 @@ class App extends React.Component {
         artist: 'Yeezy',
         apiSource: 'test',
       },
+      playlist: [],
       searching: false,
       loggedIn: false,
       listeningTo: null,
@@ -50,6 +51,12 @@ class App extends React.Component {
   handleCardPlay(track) {
     this.setState({
       currentTrack: track,
+    });
+    var playlist = this.state.playlist.slice();
+    playlist.push(track);
+    console.log(playlist);
+    this.setState({
+      playlist: playlist
     });
   }
 

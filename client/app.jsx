@@ -77,14 +77,6 @@ class App extends React.Component {
       });
   }
 
-  callFBLogin() {
-    FB.login();
-  }
-
-  callFBLogout () {
-    FB.logout();
-  }
-
   pageChange() {
     if (this.state.page === 'tracks') {
       this.setState({page: 'users'});

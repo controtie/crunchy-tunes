@@ -5,7 +5,8 @@ import Button from 'react-toolbox/lib/button';
 class Facebook extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
 
 
     this.state = {
@@ -53,8 +54,9 @@ class Facebook extends React.Component {
   // successful.  See statusChangeCallback() for when this call is made.
   fetchUserInfo() {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-    console.log('Successful login for: ' + response.name);
+    FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
+      console.log(response);
+      console.log('Successful login for: ', response.name);
     });
     this.setState({ loggedin: true });
   }
@@ -82,11 +84,19 @@ class Facebook extends React.Component {
     }.bind(this));
   }
 
-  handleClick() {
+  handleLogin() {
     FB.login((response) => {
       FB.getLoginStatus(() => {
         this.statusChangeCallback(response);
       });
+    }, {
+      scope: 'public_profile, email',
+    });
+  }
+
+  handleLogout() {
+    FB.logout((response) => {
+      this.setState({ loggedin: false });
     });
   }
 
@@ -94,17 +104,15 @@ class Facebook extends React.Component {
   render() {
     if (this.state.loggedin) {
       return (
-        <div><Button label="Log Out!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /></div>
+        <div><Button label="Log Out!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleLogout} /></div>
       );
     } else {
       return (
-        <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /></div>
+        <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleLogin} /></div>
       );
     }
   }
 }
-
-// <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /></div>
 
 
 export default Facebook;

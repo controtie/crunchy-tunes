@@ -1,6 +1,6 @@
 const keys = {
-  youTube: 'AIzaSyDmx467d1QuKT6XYvFVk6wbYCy06mmyVlY',
-  soundCloud: '7182630dc6a6fc8aa606657648545826',
+  youTube: 'AIzaSyCr2nZr1cn_Gg5vfHoAbSKkkqfZpGtOEB8',
+  soundCloud: '74ab5bce668cfc75adb7e4b1853f201b',
 };
 
 export default keys;

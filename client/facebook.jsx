@@ -5,18 +5,18 @@ class Facebook extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedin: false;
+      loggedin: false,
     };
   }
 
   componentDidMount() {
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function facebookSDK() {
       FB.init({
-        appId      : '1739990089549797',
-        cookie     : true,  // enable cookies to allow the server to access
+        appId: '1739990089549797',
+        cookie: true,  // enable cookies to allow the server to access
                           // the session
-        xfbml      : true,  // parse social plugins on this page
-        version    : 'v2.6' // use version 2.1
+        xfbml: true,  // parse social plugins on this page
+        version: 'v2.6', // use version 2.1
       });
 
       // Now that we've initialized the JavaScript SDK, we call
@@ -30,7 +30,7 @@ class Facebook extends React.Component {
       //    your app or not.
       //
       // These three cases are handled in the callback function.
-      FB.getLoginStatus(function(response) {
+      FB.getLoginStatus(function (response) {
         this.statusChangeCallback(response);
       }.bind(this));
     }.bind(this);
@@ -53,11 +53,11 @@ class Facebook extends React.Component {
     console.log('Successful login for: ' + response.name);
     });
           // Logged into your app and Facebook.
-    this.setState({loggedin: true});
+    this.setState({ loggedin: true });
   }
 
   // This is called with the results from from FB.getLoginStatus().
-  statusChangeCallback: function(response) {
+  statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -89,17 +89,14 @@ class Facebook extends React.Component {
 
   handleClick() {
     FB.login(this.checkLoginState());
-  },
+  }
 
 
   render() {
     return (
-      <div>
-        <Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> 
-        <Button label="Log Out!" style={{color: 'white' }} onClick={this.callFBLogout} /> 
-      </div>
+      <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> ;</div>
     );
   }
 }
 
-export default App;
+export default Facebook;

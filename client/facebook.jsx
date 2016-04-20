@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-toolbox/lib/button';
 
 
 class Facebook extends React.Component {
@@ -94,7 +95,7 @@ class Facebook extends React.Component {
 
   render() {
     return (
-      <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> ;</div>
+      <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleClick} /> </div>
     );
   }
 }

@@ -5,6 +5,7 @@ import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
+import Facebook from './facebook.jsx';
 import queryAll from './queryAll.js';
 import _ from 'underscore';
 import Button from 'react-toolbox/lib/button';
@@ -111,8 +112,7 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer track = {this.state.currentTrack} />
-            <Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> 
-            <Button label="Log Out!" style={{color: 'white' }} onClick={this.callFBLogout} /> 
+            <Facebook />
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
           </AppBar>
           {pageLayout}

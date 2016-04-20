@@ -25,7 +25,9 @@ class App extends React.Component {
       },
       searching: false,
       loggedIn: false,
-      listeningTo: null
+      listeningTo: null,
+      users: [],
+      page: 'tracks'
     };
   }
 
@@ -79,11 +81,24 @@ class App extends React.Component {
     FB.logout();
   }
 
-  broadcast() {
-
+  pageChange() {
+    if (this.state.page === 'tracks') {
+      this.setState({page: 'users'});
+    } else {
+      this.setState({page: 'tracks'});
+    }
   }
 
   render() {
+    var pageLayout;
+    if (this.state.page === 'tracks') {
+      pageLayout = <div>
+      <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
+      <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.handleCardPlay.bind(this)} />
+      </div>
+    } else {
+      pageLayout = <UsersContainer users = {this.state.users} pickUser = {this.pickUser.bind(this)} />
+    }
     return (
       <div>
           <AppBar className="appBar" >
@@ -98,12 +113,9 @@ class App extends React.Component {
             <SongPlayer track = {this.state.currentTrack} />
             <Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.callFBLogin} /> 
             <Button label="Log Out!" style={{color: 'white' }} onClick={this.callFBLogout} /> 
-            <Button label="Simon Says!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.broadcast} /> 
+            <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
           </AppBar>
-          <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
-          <CardsContainer tracks = {this.state.tracks}
-            handleCardPlay = {this.handleCardPlay.bind(this)}
-          />
+          {pageLayout}
       </div>
     );
   }

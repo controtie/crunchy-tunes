@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 var users = [];
 
 io.on('connection', function(socket){
-  console.log('a user connected', socket);
+  console.log('a user connected', socket.conn.server);
 
   socket.on('login', function(user) {
     console.log('user logged in -- ', user);

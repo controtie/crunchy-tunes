@@ -30,6 +30,9 @@ class App extends React.Component {
       users: [],
       page: 'tracks'
     };
+    socket.on('users', function(users) {
+      console.log('new users -- ', users);
+    })
   }
 
   componentDidMount() {

@@ -15,19 +15,29 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(bodyParser.json());
 
-var users = [];
+var users = {};
+
+var clientsToArray = function(clients) {
+  var results = [];
+  for (var key in clients) {
+    results.push(users[key]);
+  }
+  return results;
+};
 
 io.on('connection', function(socket){
-  console.log('a user connected', socket.conn.server);
+  console.log('a user connected');
+  users[socket.conn.id] = {};
 
   socket.on('login', function(user) {
-    console.log('user logged in -- ', user);
-    users.push(user);
-    io.emit('users', users)
-  })
+    console.log('user logged in - ', user);
+    users[socket.conn.id] = user;
+    io.emit('users', clientsToArray(socket.conn.server.clients));
+  });
 
-  socket.on('disconnect', function(user){
-    console.log('user disconnected --- ', user);
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+    delete users[socket.conn.id];
   });
 });
 

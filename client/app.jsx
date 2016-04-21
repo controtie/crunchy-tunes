@@ -117,8 +117,8 @@ class App extends React.Component {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
-      <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
-      <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
+        <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
+        <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
       </div>
     } else {
       pageLayout = <div>
@@ -142,7 +142,12 @@ class App extends React.Component {
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="100" width="100"></img> 
           </AppBar>
+          <div className="col-md-8">
           {pageLayout}
+          </div>
+          <div className="col-md-4">
+
+          </div>
       </div>
     );
   }

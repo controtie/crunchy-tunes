@@ -19,7 +19,7 @@ class App extends React.Component {
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
-      page: 'tracks',
+      page: 'tracks'
     };
     socket.on('users', function(users) {
       console.log('new users - ', users);
@@ -28,10 +28,7 @@ class App extends React.Component {
     SC.initialize({client_id: '74ab5bce668cfc75adb7e4b1853f201b'});
   }
 
-  handleCardPlay(track) {
-      this.setState({
-      currentTrack: track.contentId
-    });
+  addToPlaylist(track) {
     var playlist = this.state.playlist.slice();
     playlist.push(track);
     this.setState({
@@ -63,8 +60,7 @@ class App extends React.Component {
     this.setState({playlist: newList});
   }
 
-  playNewSong(trackID) {
-    console.log(trackID);
+  playNewSong(track) {
     var thing = this;
     SC.stream('/tracks/' + trackID.contentId )
     .then(function(player){
@@ -81,12 +77,12 @@ class App extends React.Component {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
-        <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
+        <CardsContainer tracks = {this.state.tracks} handleCardPlay={this.addToPlaylist.bind(this)} />
       </div>
     } else {
       pageLayout = <div>
-      <nav className="navBar"></nav>
-      <UsersContainer currentUser={this.state.user} users={this.state.users} pickUser={this.pickUser.bind(this)} />
+        <nav className="navBar"></nav>
+        <UsersContainer currentUser={this.state.user} users={this.state.users} pickUser={this.pickUser.bind(this)} />
       </div>
     }
     return (
@@ -109,7 +105,7 @@ class App extends React.Component {
           {pageLayout}
           </div>
           <div className="col-md-4">
-            <Playlist playlist = {this.state.playlist} removeCard = {this.handleCardPlay.bind(this)} />
+            <Playlist playlist={this.state.playlist} handleClick={this.playNewSong.bind(this)} remove={this.removeFromPlaylist.bind(this)} />
           </div>
       </div>
     );

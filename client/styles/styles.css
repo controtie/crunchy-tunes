@@ -1,5 +1,4 @@
 
-
 .main {
   display: flex;
   flex-direction: row;
@@ -8,22 +7,26 @@
 } 
 
 
+
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  flex-grow: 3;
   height: 100%;
 }
 
 .playlist {
+  padding-left: 50px;
+  padding-top: 100px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-around;
-  flex-grow: 1;
-  height: 100%;
+}
+
+.playlistDrawer {
+  width: 500px;
 }
 
 .navBar {

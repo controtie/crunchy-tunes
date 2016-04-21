@@ -3,6 +3,7 @@ import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
 import Playlist from './playlist.jsx';
+import PlaylistContainer from './playlistContainer.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
@@ -105,6 +106,7 @@ class App extends React.Component {
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="100" width="100"></img> 
+            <PlaylistContainer playlist = {this.state.tracks} removeCard = {this.handleCardPlay.bind(this)} />
           </AppBar>
           <div className="col-md-8">
           <Playlist playlist = {this.state.tracks} removeCard={this.handleCardPlay.bind(this)} />

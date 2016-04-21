@@ -2,6 +2,11 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var Users = require('./UserController.js');
+
+// Users.getUser({fbID: 222, name: 'dylan', avatar: 'avatar here'}, function (err, state) {
+//   console.log(state);
+// });
 
 var app = express();
 var http = require('http').Server(app);
@@ -33,6 +38,26 @@ io.on('connection', function(socket){
     console.log('user logged in - ', user);
     users[socket.conn.id] = user;
     io.emit('users', clientsToArray(socket.conn.server.clients));
+
+    Users.getUser(user, function (err, fetchedUser) {
+      console.log('fetchedUser = ', fetchedUser);
+      if (fetchedUser === null) {
+        console.log('posting User');
+        console.log(user);
+        Users.postUser(user, function (err, success) {
+          if (err) {
+            console.log(err);
+          } else {
+            if (success) {
+              console.log('user added!');
+            }
+          }
+        });
+      } else {
+        console.log(fetchedUser);
+      }
+    })
+
   });
 
   socket.on('disconnect', function(){

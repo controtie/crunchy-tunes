@@ -71,3 +71,11 @@ View the project roadmap [here](https://waffle.io/ImmaculateHangover/crunchy-tun
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+To set up database:
+run python /server/db.py
+
+To run server:
+npm run dev-start 
+node server/server.js
+

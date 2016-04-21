@@ -64,11 +64,11 @@ class App extends React.Component {
   }
 
   playNewSong(trackID) {
+    console.log(trackID);
     var thing = this;
     SC.stream('/tracks/' + trackID.contentId )
     .then(function(player){
       songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
-        console.log(song.http_mp3_128_url)
         thing.setState({currentTrack: song.http_mp3_128_url});
       })
       .fail(function(error) {

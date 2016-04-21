@@ -4,9 +4,6 @@ import Button from 'react-toolbox/lib/button';
 class SongPlayer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
   }
 
   reloadPlayer() { 
@@ -39,6 +36,3 @@ class SongPlayer extends React.Component {
 };
 
 export default SongPlayer;
-
-
-

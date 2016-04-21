@@ -13,14 +13,13 @@ if sys.argv[1] == 'POST':
   conn.execute(stmt);
   conn.commit()
   print 'success'
-  conn.close()
   sys.stdout.flush();
+  conn.close()
 
 
 if sys.argv[1] == 'GET':
   fbID   = sys.argv[2]
   stmt   = 'SELECT * from Users where fbID={}'.format(sys.argv[2])
-  print stmt
   cursor = conn.execute(stmt);
   for row in cursor:
     print row[0]

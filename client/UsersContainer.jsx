@@ -7,13 +7,13 @@ import style from './styles/toolbox-theme';
 const UsersContainer = ({ users, pickUser }) => {
   let cards = users.map((user) =>
     <Card onClick={() => pickUser(user)}
-      key={user.ID}
+      key={user.fbID}
       className={ClassNames(style['card'])}
-      style={{ width: '200px', height: '200px', margin: '15px' }}
+      style={{ width: '200px', height: '250px', margin: '15px' }}
     >
       <div className={ClassNames(style['image-container'])}>
         <CardMedia
-          aspectRatio="wide"
+          aspectRatio="square"
           image={user.avatar}
         />
       </div>

@@ -32,12 +32,13 @@ class App extends React.Component {
     };
     socket.on('users', function(users) {
       console.log('new users - ', users);
-    })
+      this.setState({users: users})
+    }.bind(this))
   }
 
   componentDidMount() {
     const self = this;
-    queryAll({ query: 'Kanye',
+    queryAll({ query: 'Baby Beluga',
       })
       .then((results) => {
         self.setState({
@@ -98,7 +99,7 @@ class App extends React.Component {
       <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.handleCardPlay.bind(this)} />
       </div>
     } else {
-      pageLayout = <UsersContainer users = {this.state.users} pickUser = {this.pickUser.bind(this)} />
+      pageLayout = <UsersContainer users={this.state.users} pickUser={this.pickUser.bind(this)} />
     }
     return (
       <div>

@@ -1,11 +1,29 @@
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+} 
+
 
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  flex-grow: 3;
+  height: 100%;
+}
+
+.playlist {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
+  height: 100%;
 }
 
 .navBar {

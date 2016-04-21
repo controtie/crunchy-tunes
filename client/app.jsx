@@ -81,6 +81,7 @@ class App extends React.Component {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
+        <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
         <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
       </div>
     } else {

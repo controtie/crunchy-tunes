@@ -32,7 +32,7 @@ const Playlist = ({ playlist, removeCard }) => {
     </Card>
   );
   return (
-    <div className="cardsContainer">
+    <div className="playlist">
       {cards}
     </div>
   );

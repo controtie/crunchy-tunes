@@ -1,6 +1,6 @@
 var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
-//spawn a child
+//spawn a child process
 var spawn = require('child_process').spawn;
 
 exports.getUser = function (user, callback) {
@@ -42,3 +42,4 @@ exports.postUser = function (user, callback) {
   })
 
 }
+

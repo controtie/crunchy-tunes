@@ -19,8 +19,14 @@ conn.execute('''CREATE TABLE UsersPlaylists
   ''');
 
 conn.execute('''CREATE TABLE Playlists
-  (ID INT PRIMARY KEY NOT NULL,
-  URL TEXT NOT NULL);
+  (playlistID INT PRIMARY KEY,
+  userID TEXT,
+  songs TEXT);
+  ''');
+
+conn.execute('''CREATE TABLE Songs
+  (contentID INTEGER,
+  songTitle TEXT);
   ''');
 
 print 'Table created successfully!';

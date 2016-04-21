@@ -3,6 +3,7 @@ import Nav from './nav.js';
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
+import Playlist from './Playlist.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
@@ -29,7 +30,8 @@ class App extends React.Component {
       loggedIn: false,
       listeningTo: null,
       users: [],
-      page: 'tracks'
+      page: 'tracks',
+      playlist: []
     };
     socket.on('users', function(users) {
       console.log('new users - ', users);
@@ -98,6 +100,11 @@ class App extends React.Component {
     socket.emit('login', user);
   }
 
+  removeFromPlaylist(songIndex) {
+    var newList = this.state.playlist.splice(songIndex, 1);
+    this.setState({playlist: newList});
+  }
+
   render() {
     var pageLayout;
     if (this.state.page === 'tracks') {
@@ -106,7 +113,10 @@ class App extends React.Component {
       <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.handleCardPlay.bind(this)} />
       </div>
     } else {
-      pageLayout = <UsersContainer users={this.state.users} pickUser={this.pickUser.bind(this)} />
+      pageLayout = <div>
+      <nav className="navBar"></nav>
+      <UsersContainer users={this.state.users} pickUser={this.pickUser.bind(this)} />
+      </div>
     }
     return (
       <div>
@@ -123,6 +133,7 @@ class App extends React.Component {
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
           </AppBar>
+          <Playlist playlist={this.state.playlist} removeCard={this.removeFromPlaylist.bind(this)} />
           {pageLayout}
       </div>
     );

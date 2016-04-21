@@ -19,6 +19,7 @@ class App extends React.Component {
       playlist: [],
       searching: false,
       loggedIn: false,
+      user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
       page: 'tracks',
@@ -89,7 +90,7 @@ class App extends React.Component {
   }
 
   login(user) {
-    this.setState({loggedIn: true});
+    this.setState({loggedIn: true, user: user});
     socket.emit('login', user);
   }
 
@@ -116,13 +117,13 @@ class App extends React.Component {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
-      <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
-      <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
+        <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
+        <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
       </div>
     } else {
       pageLayout = <div>
       <nav className="navBar"></nav>
-      <UsersContainer users={this.state.users} pickUser={this.pickUser.bind(this)} />
+      <UsersContainer currentUser={this.state.user} users={this.state.users} pickUser={this.pickUser.bind(this)} />
       </div>
     }
     return (
@@ -138,9 +139,15 @@ class App extends React.Component {
             />
             <SongPlayer track = {this.state.currentTrack} />
             <Facebook login={this.login.bind(this)}/>
-            <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
+            <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} />
+            <img src={this.state.user.avatar} height="100" width="100"></img> 
           </AppBar>
+          <div className="col-md-8">
           {pageLayout}
+          </div>
+          <div className="col-md-4">
+
+          </div>
       </div>
     );
   }

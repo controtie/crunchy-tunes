@@ -107,11 +107,11 @@ class Facebook extends React.Component {
   render() {
     if (this.state.loggedin) {
       return (
-        <div><Button label="Log Out!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleLogout} /></div>
+        <div><Button label="Log Out!" style={{color: 'white' }} onClick={this.handleLogout} /></div>
       );
     } else {
       return (
-        <div><Button label="Log In!" style={{color: 'white', paddingLeft: '45px' }} onClick={this.handleLogin} /></div>
+        <div><Button label="Log In!" style={{color: 'white' }} onClick={this.handleLogin} /></div>
       );
     }
   }

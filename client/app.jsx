@@ -2,6 +2,8 @@ import React from 'react';
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
+import Playlist from './playlist.jsx';
+import PlaylistContainer from './playlistContainer.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
@@ -80,6 +82,7 @@ class App extends React.Component {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
+        <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
         <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
       </div>
     } else {
@@ -102,13 +105,14 @@ class App extends React.Component {
             <SongPlayer track = {this.state.currentTrack} />
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} />
+            <PlaylistContainer playlist = {this.state.tracks} removeCard = {this.handleCardPlay.bind(this)} />
             <img src={this.state.user.avatar} height="100" width="100"></img> 
           </AppBar>
           <div className="col-md-8">
           {pageLayout}
           </div>
           <div className="col-md-4">
-
+            <Playlist playlist = {this.state.tracks} removeCard = {this.handleCardPlay.bind(this)} />
           </div>
       </div>
     );

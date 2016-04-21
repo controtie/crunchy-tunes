@@ -47,6 +47,11 @@ $card-font-size: $font-size-small !default;
   transition: filter 0.8s;
 }
 
+.source-logo-for-playlist {
+  filter: grayscale(50%);
+  transition: filter 0.8s;
+}
+
 .image-container {
   position: relative;
 }
@@ -56,6 +61,10 @@ $card-font-size: $font-size-small !default;
 }
 
 .card:hover .source-logo {
+  filter: none;
+}
+
+.card:hover .source-logo-for-playlist {
   filter: none;
 }
 

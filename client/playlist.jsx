@@ -7,11 +7,13 @@ import style from './styles/toolbox-theme';
 const Playlist = ({ playlist, handleClick }) => {
   let cards = playlist.map((track) =>
     <Card onClick={() => handleClick(track)}
+      className={ClassNames(style['card'])}
       key={track.contentId}
       className={ClassNames(style['card'])}
       style={{ width: '350px', height: '100px', margin: '15px' }}
     >
       <CardTitle
+            className={ClassNames(style['source-logo-for-playlist'])}
             avatar="https://c1.staticflickr.com/9/8082/8292777643_65090144e9.jpg"
             title={track.creator}
             subtitle={track.songTitle}

@@ -109,7 +109,7 @@ class App extends React.Component {
           {pageLayout}
           </div>
           <div className="col-md-4">
-            <Playlist playlist = {this.state.play} removeCard = {this.handleCardPlay.bind(this)} />
+            <Playlist playlist = {this.state.playlist} removeCard = {this.handleCardPlay.bind(this)} />
           </div>
       </div>
     );

@@ -31,13 +31,14 @@ class App extends React.Component {
       page: 'tracks'
     };
     socket.on('users', function(users) {
-      console.log('new users -- ', users);
-    })
+      console.log('new users - ', users);
+      this.setState({users: users})
+    }.bind(this))
   }
 
   componentDidMount() {
     const self = this;
-    queryAll({ query: 'Kanye',
+    queryAll({ query: 'Baby Beluga',
       })
       .then((results) => {
         self.setState({
@@ -85,6 +86,11 @@ class App extends React.Component {
     }
   }
 
+  login(user) {
+    this.setState({loggedIn: true});
+    socket.emit('login', user);
+  }
+
   render() {
     var pageLayout;
     if (this.state.page === 'tracks') {
@@ -93,7 +99,7 @@ class App extends React.Component {
       <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.handleCardPlay.bind(this)} />
       </div>
     } else {
-      pageLayout = <UsersContainer users = {this.state.users} pickUser = {this.pickUser.bind(this)} />
+      pageLayout = <UsersContainer users={this.state.users} pickUser={this.pickUser.bind(this)} />
     }
     return (
       <div>
@@ -107,7 +113,7 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer track = {this.state.currentTrack} />
-            <Facebook />
+            <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
           </AppBar>
           {pageLayout}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.3.js"   integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc="   crossorigin="anonymous"></script>
+</head>
+<body>
+  <script>
+  SC.initialize({
+    client_id: '74ab5bce668cfc75adb7e4b1853f201b'
+  });
+
+
+  var updateSource = function (link) { 
+    var audio = document.getElementById('player');
+    var source = document.getElementById('currentsong');
+    source.src = songLink.responseJSON.http_mp3_128_url;
+    audio.load();
+    audio.play();
+  };
+
+  var songLink;
+
+  var playNewSong = function (trackID) {
+    SC.stream('/tracks/' + trackID )
+    .then(function(player){
+      songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
+        console.log( "Link Retrieved", songLink.responseJSON.http_mp3_128_url );
+      })
+      .done(function() {
+        console.log( "Now Playing" );
+        updateSource();
+
+        $('#changesong').on({
+          'click': function(){
+            updateSource();
+            console.log('button clicked');
+          }
+        });
+      })
+      .fail(function() {
+        console.log( "error" );
+      });
+
+    });
+  };
+
+
+
+  </script>
+  
+  <button id="changesong" type="button">PLEASE WORK D: </button>
+
+
+
+<audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no">
+  <source id="currentsong" src='' type="audio/wav">
+</audio>
+
+<br>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
+
+
+
+
+
+</body>
+</html>
+
+
+<!--CURRENTLYWORKING STATE-->
+<!--CURRENTLYWORKING STATE-->
+<!--CURRENTLYWORKING STATE-->
+<!--CURRENTLYWORKING STATE-->
+<!--CURRENTLYWORKING STATE-->
+
+
+
+
+
+

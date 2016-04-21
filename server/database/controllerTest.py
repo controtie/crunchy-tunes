@@ -3,9 +3,6 @@
 import sys
 import sqlite3
 
-print "We've called this script! args1 is", sys.argv[1];
-sys.stdout.flush();
-
 conn = sqlite3.connect('test.db')
 
 if sys.argv[1] == 'POST':
@@ -21,10 +18,8 @@ if sys.argv[1] == 'POST':
 
 
 if sys.argv[1] == 'GET':
-  print 'inside GET!'
   fbID   = sys.argv[2]
   stmt   = 'SELECT * from Users where fbID={}'.format(sys.argv[2])
-  print stmt
   cursor = conn.execute(stmt);
   for row in cursor:
     print row[0]

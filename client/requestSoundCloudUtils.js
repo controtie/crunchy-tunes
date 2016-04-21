@@ -16,7 +16,6 @@ const searchSoundCloud = ({ query }) => {
     })
     .then((arrayOfSongs) => {
     // add source tag before returning promise
-    console.log(arrayOfSongs);
       const mapResult = arrayOfSongs.map((songObj) => {
         songObj.apiSource = 'SoundCloud';
         return songObj;

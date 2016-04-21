@@ -3,7 +3,6 @@ import Nav from './nav.js';
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
-import Playlist from './Playlist.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
@@ -15,16 +14,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: [
-        {
-          artist: 'Yeezy',
-          apiSource: 'test',
-        },
-      ],
-      currentTrack: {
-        artist: 'Yeezy',
-        apiSource: 'test',
-      },
+      tracks: [],
+      currentTrack: '',
       playlist: [],
       searching: false,
       loggedIn: false,
@@ -36,7 +27,10 @@ class App extends React.Component {
     socket.on('users', function(users) {
       console.log('new users - ', users);
       this.setState({users: users})
-    }.bind(this))
+    }.bind(this));
+    SC.initialize({
+      client_id: '74ab5bce668cfc75adb7e4b1853f201b'
+    });
   }
 
   componentDidMount() {
@@ -51,12 +45,11 @@ class App extends React.Component {
   }
 
   handleCardPlay(track) {
-    this.setState({
-      currentTrack: track,
+      this.setState({
+      currentTrack: track.contentId
     });
     var playlist = this.state.playlist.slice();
     playlist.push(track);
-    console.log(playlist);
     this.setState({
       playlist: playlist
     });
@@ -105,12 +98,26 @@ class App extends React.Component {
     this.setState({playlist: newList});
   }
 
+  playNewSong(trackID) {
+    var thing = this;
+    SC.stream('/tracks/' + trackID.contentId )
+    .then(function(player){
+      songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
+
+        thing.setState({currentTrack: song.http_mp3_128_url});
+      })
+      .fail(function(error) {
+        console.log( "audio player error - ", error );
+      });
+    });
+  }
+
   render() {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
       <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
-      <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.handleCardPlay.bind(this)} />
+      <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
       </div>
     } else {
       pageLayout = <div>
@@ -121,7 +128,7 @@ class App extends React.Component {
     return (
       <div>
           <AppBar className="appBar" >
-            <Navigation type="horizontal" style= { { width: '700px', }} actions={[
+            <Navigation type="horizontal" style= {{ width: '700px' }} actions={[
               {
                 label: 'Crunchy Tunes',
                 raised: true,
@@ -133,7 +140,6 @@ class App extends React.Component {
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} /> 
           </AppBar>
-          <Playlist playlist={this.state.playlist} removeCard={this.removeFromPlaylist.bind(this)} />
           {pageLayout}
       </div>
     );
@@ -141,3 +147,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+// <Playlist playlist={this.state.playlist} removeCard={this.removeFromPlaylist.bind(this)} />

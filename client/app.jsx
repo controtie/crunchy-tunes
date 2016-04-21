@@ -2,6 +2,7 @@ import React from 'react';
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
+import Playlist from './playlist.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
@@ -105,6 +106,7 @@ class App extends React.Component {
             <img src={this.state.user.avatar} height="100" width="100"></img> 
           </AppBar>
           <div className="col-md-8">
+          <Playlist playlist = {this.state.tracks} removeCard={this.handleCardPlay.bind(this)} />
           {pageLayout}
           </div>
           <div className="col-md-4">

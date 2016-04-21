@@ -105,15 +105,14 @@ class App extends React.Component {
             <SongPlayer track = {this.state.currentTrack} />
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', paddingLeft: '45px' }} onClick={this.pageChange.bind(this)} />
-            <img src={this.state.user.avatar} height="100" width="100"></img> 
             <PlaylistContainer playlist = {this.state.tracks} removeCard = {this.handleCardPlay.bind(this)} />
+            <img src={this.state.user.avatar} height="100" width="100"></img> 
           </AppBar>
           <div className="col-md-8">
-          <Playlist playlist = {this.state.tracks} removeCard={this.handleCardPlay.bind(this)} />
           {pageLayout}
           </div>
           <div className="col-md-4">
-
+            <Playlist playlist = {this.state.tracks} removeCard = {this.handleCardPlay.bind(this)} />
           </div>
       </div>
     );

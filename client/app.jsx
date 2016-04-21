@@ -1,12 +1,10 @@
 import React from 'react';
-import Nav from './nav.js';
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
-import queryAll from './queryAll.js';
 import _ from 'underscore';
 import Button from 'react-toolbox/lib/button';
 
@@ -14,35 +12,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: [],
       currentTrack: '',
       playlist: [],
-      searching: false,
       loggedIn: false,
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
-      page: 'tracks',
-      playlist: []
+      page: 'tracks'
     };
     socket.on('users', function(users) {
       console.log('new users - ', users);
       this.setState({users: users})
     }.bind(this));
-    SC.initialize({
-      client_id: '74ab5bce668cfc75adb7e4b1853f201b'
-    });
-  }
-
-  componentDidMount() {
-    const self = this;
-    queryAll({ query: 'Baby Beluga',
-      })
-      .then((results) => {
-        self.setState({
-          tracks: results,
-        });
-      });
+    SC.initialize({client_id: '74ab5bce668cfc75adb7e4b1853f201b'});
   }
 
   handleCardPlay(track) {
@@ -60,25 +42,6 @@ class App extends React.Component {
     this.setState({
       listeningTo: user
     })
-  }
-
-  handleSearch(value) {
-    const self = this;
-    if(value === null) {
-      this.setState({
-        searching: false,
-      });
-    }
-    this.setState({
-      searching: true,
-    });
-    queryAll({ query: value })
-      .then((results) => {
-        self.setState({
-          tracks: results,
-          searching: false,
-        });
-      });
   }
 
   pageChange() {
@@ -104,7 +67,7 @@ class App extends React.Component {
     SC.stream('/tracks/' + trackID.contentId )
     .then(function(player){
       songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
-
+        console.log(song.http_mp3_128_url)
         thing.setState({currentTrack: song.http_mp3_128_url});
       })
       .fail(function(error) {
@@ -117,7 +80,6 @@ class App extends React.Component {
     var pageLayout;
     if (this.state.page === 'tracks') {
       pageLayout = <div>
-        <Nav handleSearch = { this.handleSearch.bind(this) } searching={ this.state.searching } />
         <CardsContainer tracks = {this.state.tracks} handleCardPlay = {this.playNewSong.bind(this)} />
       </div>
     } else {

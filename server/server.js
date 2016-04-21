@@ -4,10 +4,6 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var Users = require('./UserController.js');
 
-// Users.getUser({fbID: 222, name: 'dylan', avatar: 'avatar here'}, function (err, state) {
-//   console.log(state);
-// });
-
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -40,10 +36,8 @@ io.on('connection', function(socket){
     io.emit('users', clientsToArray(socket.conn.server.clients));
 
     Users.getUser(user, function (err, fetchedUser) {
-      console.log('fetchedUser = ', fetchedUser);
       if (fetchedUser === null) {
-        console.log('posting User');
-        console.log(user);
+        console.log('User not found: posting User...');
         Users.postUser(user, function (err, success) {
           if (err) {
             console.log(err);
@@ -54,7 +48,7 @@ io.on('connection', function(socket){
           }
         });
       } else {
-        console.log(fetchedUser);
+        console.log('run some callback here on ', fetchedUser);
       }
     })
 

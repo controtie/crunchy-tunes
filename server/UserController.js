@@ -4,14 +4,9 @@ var decoder = new StringDecoder('utf8');
 var spawn = require('child_process').spawn;
 
 exports.getUser = function (user, callback) {
-  console.log('-----calling getUser----');
   var process = spawn('python', ['./database/UserController.py', 'GET', +user.fbID]);
   var fetchedUser = null;
-  
   process.stdout.on('data', function (data) {
-    console.log('beginning');
-    console.log('reading data from stdout');
-    console.log(decoder.write(data));
     if (data) {
       var splitData = decoder.write(data).split('\n');
       var userData = {
@@ -25,7 +20,6 @@ exports.getUser = function (user, callback) {
   });
   
   process.on('close', function(data) {
-    console.log('exiting');
     callback(null, fetchedUser);
   })
 }
@@ -35,8 +29,6 @@ exports.postUser = function (user, callback) {
   var success = false;
   process.stdout.on('data', function (data) {
     if (data) {
-      console.log('logging data');
-      console.log(data);
       success = true;
     }
   });

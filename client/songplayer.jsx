@@ -1,31 +1,41 @@
 import React from 'react';
 import Button from 'react-toolbox/lib/button';
 
-window.reloadPlayer = function (link) { 
-  var audio = document.getElementById('player');
-  audio.load();
-  audio.play();
-};
+class SongPlayer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-const SongPlayer = ({ track }) => {
-  console.log(track);
+    }
+  }
 
-  return (
-    <div className="songPlayer">
-      <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no">
-        <source id="currentsong" src={track} type="audio/wav"></source>
-      </audio>
-      <div><Button label="reload!" style={{color: 'white', paddingLeft: '45px' }} onClick={window.reloadPlayer} /></div>
-      <script>
+  reloadPlayer() { 
+    var audio = document.getElementById('player');
+    audio.load();
+    audio.play();
+  }
 
-      var source = document.getElementById('currentsong');
-      if(source.src === undefined) {
-        setTimeout(function(){window.reloadPlayer()}, 1)
-      }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.track === this.props.track) {
+      return false;
+    }
+    return true;
+  }
 
-      </script>
-    </div>
-  );
+  componentDidUpdate() {
+    this.reloadPlayer()
+    console.log('loaded');
+  }
+
+  render() {
+    return (
+      <div className="songPlayer">
+        <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no">
+          <source id="currentsong" src={this.props.track} type="audio/wav"></source>
+        </audio>
+      </div>
+    );
+  }
 };
 
 export default SongPlayer;

@@ -4,13 +4,13 @@ import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox
 import ClassNames from 'classnames';
 import style from './styles/toolbox-theme';
 
-const Playlist = ({ playlist, handleClick }) => {
-  let cards = playlist.map((track) =>
-    <Card onClick={() => handleClick(track)}
+const Playlist = ({ playlist, handleClick, remove }) => {
+  let cards = playlist.map((track, index) =>
+    <Card
       className={ClassNames(style['card'])}
       key={track.contentId}
       className={ClassNames(style['card'])}
-      style={{ width: '350px', height: '100px', margin: '15px' }}
+      style={{ width: '350px', height: '200px', margin: '15px' }}
     >
       <CardTitle
             className={ClassNames(style['source-logo-for-playlist'])}
@@ -18,7 +18,10 @@ const Playlist = ({ playlist, handleClick }) => {
             title={track.creator}
             subtitle={track.songTitle}
       />
-
+      <CardActions>
+        <Button label="Remove" onClick={() => remove(index)} />
+        <Button label="Play" onClick={() => handleClick(track)} />
+      </CardActions>
     </Card>
   );
   return (

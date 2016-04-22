@@ -15,7 +15,7 @@ class App extends React.Component {
     this.state = {
       currentTrack: {},
       playlist: [],
-      playIndex: 1,
+      playIndex: null,
       loggedIn: false,
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
@@ -49,7 +49,7 @@ class App extends React.Component {
     });
     console.log('next song!');
     console.log(this.state.playlist[this.state.playIndex].songTitle);
-    this.playNewSong(this.state.playlist[this.state.playIndex]);
+    this.playNewSong(this.state.playlist[this.state.playIndex], this.state.playIndex);
   }
 
   addToPlaylist(track) {
@@ -99,7 +99,10 @@ class App extends React.Component {
     socket.emit('playlistLookup', user);
   }
 
-  playNewSong(track) {
+  playNewSong(track, index) {
+    this.setState({
+      playIndex: index,
+    });
     var thing = this;
     SC.stream('/tracks/' + track.id )
     .then(function(player){

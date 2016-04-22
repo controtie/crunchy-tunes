@@ -6,10 +6,6 @@
   justify-content: space-around;
 } 
 
-.test {
-  position: relative;
-  float: right;
-}
 
 .cardsContainer {
   display: flex;

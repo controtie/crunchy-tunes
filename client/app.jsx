@@ -50,22 +50,27 @@ class App extends React.Component {
     this.setState({
       playlist: playlist
     });
-    console.log('this.state.playlist', this.state.playlist);
-    console.log('playlist', playlist);
-    if(playlist.length === 1) {
-      this.playNewSong(playlist['0']);
+    if (playlist.length === 1) {
+      this.playNewSong(track);
     }
-    socket.emit('playlist', this.state.playlist);
+    if (this.state.listeningTo !== null) {
+      socket.emit('playlist', playlist);
+    }
   }
 
   removeFromPlaylist(songIndex) {
     var newList = this.state.playlist.slice();
     newList.splice(songIndex, 1);
     this.setState({ playlist: newList });
-    socket.emit('playlist', this.state.playlist);
+    if (this.state.listeningTo !== null) {
+      socket.emit('playlist', newList);
+    }
   }
 
   pickUser(user) {
+    if (user.fbID === this.state.user.fbID) {
+      user = null;
+    }
     this.setState({ listeningTo: user });
     socket.emit('playlistLookup', user);
   }
@@ -73,6 +78,8 @@ class App extends React.Component {
   pageChange() {
     if (this.state.page === 'tracks') {
       this.setState({page: 'users'});
+      socket.emit('playlistLookup', this.state.user);
+      this.setState({listeningTo: null})
     } else {
       this.setState({page: 'tracks'});
     }
@@ -137,5 +144,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// <Playlist playlist={this.state.playlist} removeCard={this.removeFromPlaylist.bind(this)} />

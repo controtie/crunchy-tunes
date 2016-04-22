@@ -145,7 +145,7 @@ class App extends React.Component {
           {pageLayout}
           </div>
           <div className="col-md-4">
-            <Playlist playlist={this.state.playlist} handleClick={this.playThisSongFromPlaylist.bind(this)} remove={this.removeFromPlaylist.bind(this)} />
+            <Playlist playlist={this.state.playlist} currentSongIndex={this.state.playIndex} handleClick={this.playNewSong.bind(this)} remove={this.removeFromPlaylist.bind(this)} />
           </div>
       </div>
     );

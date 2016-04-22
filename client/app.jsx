@@ -15,7 +15,7 @@ class App extends React.Component {
     this.state = {
       currentTrack: '',
       playlist: [],
-      playIndex: 0,
+      playIndex: 1,
       loggedIn: false,
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
@@ -30,7 +30,18 @@ class App extends React.Component {
     socket.on('playlist', function(playlist) {
       this.setState({playlist: playlist});
     }.bind(this));
+
     SC.initialize({client_id: '74ab5bce668cfc75adb7e4b1853f201b'});
+  }
+
+  whenSongEnds () {
+    this.setState({
+      playIndex: this.state.playIndex + 1
+    });
+    console.log('next song!');
+    console.log(this.state.playlist[this.state.playIndex]);
+    this.playNewSong(this.state.playlist[this.state.playIndex]);
+
   }
 
   addToPlaylist(track) {
@@ -42,8 +53,6 @@ class App extends React.Component {
     console.log('this.state.playlist', this.state.playlist);
     console.log('playlist', playlist);
     if(playlist.length === 1) {
-      console.log('this.state.playlist', this.state.playlist);
-      console.log('playlist', playlist);
       this.playNewSong(playlist['0']);
     }
     socket.emit('playlist', this.state.playlist);
@@ -111,7 +120,7 @@ class App extends React.Component {
                 icon: 'audiotrack',
               }]}
             />
-            <SongPlayer track = {this.state.currentTrack} />
+            <SongPlayer track = {this.state.currentTrack} songEnd={this.whenSongEnds.bind(this)} />
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="89" width="89"></img> 

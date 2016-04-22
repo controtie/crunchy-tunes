@@ -34,12 +34,18 @@ class App extends React.Component {
     this.setState({
       playlist: playlist
     });
+    socket.emit('playlist', this.state.playlist);
+  }
+
+  removeFromPlaylist(songIndex) {
+    var newList = this.state.playlist.slice();
+    newList.splice(songIndex, 1);
+    this.setState({ playlist: newList });
+    socket.emit('playlist', this.state.playlist);
   }
 
   pickUser(user) {
-    this.setState({
-      listeningTo: user
-    })
+    this.setState({ listeningTo: user })
   }
 
   pageChange() {
@@ -53,13 +59,6 @@ class App extends React.Component {
   login(user) {
     this.setState({loggedIn: true, user: user});
     socket.emit('login', user);
-  }
-
-  removeFromPlaylist(songIndex) {
-    console.log('index of removed song', songIndex);
-    var newList = this.state.playlist.slice();
-    newList.splice(songIndex, 1);
-    this.setState({ playlist: newList });
   }
 
   playNewSong(track) {

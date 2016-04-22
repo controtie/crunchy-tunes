@@ -1,26 +1,41 @@
 var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
-//spawn a child
+//spawn a child process
 var spawn = require('child_process').spawn;
 
-exports.getUser = function (user, callback) {
-  var process = spawn('python', ['./database/UserController.py', 'GET', +user.fbID]);
-  var fetchedUser = null;
+exports.getAllUsers = function (callback) {
+  var process = spawn('python', ['./database/UserController.py', 'GET']);
+  var fetchedUsers = null;
+
+  var formattedUserData = [];
   process.stdout.on('data', function (data) {
     if (data) {
       var splitData = decoder.write(data).split('\n');
-      var userData = {
-        id: splitData[0],
-        fbID: splitData[1],
-        name: splitData[2],
-        avatar: splitData[3] 
+      var userData = [];
+      for (var i = 0; i < splitData.length; i++) {
+        if (splitData[i] < 100 && splitData[i] !== '') {
+          userData.push([])
+        }
+        userData[userData.length-1].push(splitData[i]);
       }
-      fetchedUser = userData;
+      for (var i = 0; i < userData.length; i++) {
+        var user = {
+          ID: userData[i][0],
+          fbID: userData[i][1],
+          name: userData[i][2],
+          avatar: userData[i][3]
+        }
+        formattedUserData.push(user);
+      }
     }
+  });
+
+  process.stderr.on('data', function (data) {
+    console.log(decoder.write(data));
   });
   
   process.on('close', function(data) {
-    callback(null, fetchedUser);
+    callback(formattedUserData);
   })
 }
 
@@ -31,14 +46,21 @@ exports.postUser = function (user, callback) {
     if (data) {
       success = true;
     }
+    console.log(decoder.write(data));
+  });
+
+  process.stderr.on('data', function (data) {
+    console.log('error @ ./database/UserController.py');
+    console.log('called @ ./UserController.js: 55');
+    console.log(decoder.write(data));
   });
 
   process.on('close', function(data) {
     if (success) {
-      callback(null, success);
+      callback(null, 'user post success!');
     } else {
-      callback('postUser failed at UserController.js: 30', success);
+      callback('postUser failed at UserController.js: 43', success);
     }
-  })
-
+  });
 }
+

@@ -1,12 +1,22 @@
+//used to test interactions between .js and .py controllers
 var Users = require('./UserController.js');
+var Playlists = require('./PlaylistController.js')
+
+// Playlists.getPlaylist({ID: 123}, function (err, playlist) {
+//   console.log('playlist = ', playlist);
+// })
+
+// Playlists.postPlaylist({ID: 1234, URL: 'rocky!'}, function (err, playlist) {
+//   console.log('playlist posted? ', playlist);
+// })
 
 
-Users.getUser({fbID: 222}, function (err, user) {
-      console.log('this should not be null!');
-      console.log(user);
-    });
+Users.getAllUsers(function (err, user) {
+    console.log(user);
+  });
 
-// Users.postUser({fbID: 222, name: 'dylan', avatar: 'avatar here'}, function (state) {
+
+// Users.postUser({fbID: 225, name: 'dylan', avatar: 'avatar here'}, function (state) {
 //   console.log(state);
 // });
 

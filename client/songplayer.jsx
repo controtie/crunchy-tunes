@@ -13,7 +13,7 @@ class SongPlayer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.track === this.props.track) {
+    if (nextProps.track.url === this.props.track.url) {
       return false;
     }
     return true;
@@ -21,15 +21,15 @@ class SongPlayer extends React.Component {
 
   componentDidUpdate() {
     this.reloadPlayer()
-    console.log('track uploaded');
   }
 
 
   render() {
     return (
       <div className="songPlayer">
+        <h3>{this.props.track.songTitle}</h3>
         <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no" onEnded={this.props.songEnd}>
-          <source id="currentsong" src={this.props.track} type="audio/wav"></source>
+          <source id="currentsong" src={this.props.track.url} type="audio/wav"></source>
         </audio>
       </div>
     );

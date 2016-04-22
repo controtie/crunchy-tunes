@@ -13,7 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTrack: '',
+      currentTrack: {},
       playlist: [],
       playIndex: 1,
       loggedIn: false,
@@ -104,7 +104,8 @@ class App extends React.Component {
     SC.stream('/tracks/' + track.id )
     .then(function(player){
       songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
-        thing.setState({currentTrack: song.http_mp3_128_url});
+        track.url = song.http_mp3_128_url;
+        thing.setState({currentTrack: track});
       })
       .fail(function(error) {
         console.log( "audio player error - ", error );
@@ -135,7 +136,7 @@ class App extends React.Component {
                 icon: 'audiotrack',
               }]}
             />
-            <SongPlayer track = {this.state.currentTrack} songEnd={this.whenSongEnds.bind(this)} />
+            <SongPlayer track={this.state.currentTrack} songEnd={this.whenSongEnds.bind(this)} />
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="89" width="89"></img> 

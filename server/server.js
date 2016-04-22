@@ -35,24 +35,11 @@ io.on('connection', function(socket){
     users[socket.conn.id] = user;
     io.emit('users', clientsToArray(socket.conn.server.clients));
 
-    Users.getUser(user, function (err, fetchedUser) {
-      if (fetchedUser === null) {
-        console.log('User not found: posting User...');
-        Users.postUser(user, function (err, success) {
-          if (err) {
-            console.log(err);
-          } else {
-            if (success) {
-              console.log('user added!');
-            }
-          }
-        });
-      } else {
-        console.log('run some callback here on ', fetchedUser);
-      }
-    })
+    // Users.getAllUsers()
+  });
 
-    fs.readFile(__dirname+'/playlists/'+users[socket.conn.id].fbID+'.json', 'utf8', function(err, playlist) {
+  socket.on('playlistLookup', function(user) {
+    fs.readFile(__dirname+'/playlists/'+user.fbID+'.json', 'utf8', function(err, playlist) {
       if (playlist) {
         playlist = JSON.parse(playlist);
         socket.emit('playlist', playlist);
@@ -74,5 +61,5 @@ io.on('connection', function(socket){
 });
 
 var server = http.listen(port, function(){
-  console.log('listening on *:3000');
+  console.log('listening on *:8080');
 });

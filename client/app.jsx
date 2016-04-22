@@ -79,7 +79,7 @@ class App extends React.Component {
 
   render() {
     var pageLayout;
-    if (this.state.page === 'tracks') {
+    if (this.state.page === 'tracks' && this.state.loggedIn === true) {
       pageLayout = <div>
         <CardsContainer tracks = {this.state.tracks} handleCardPlay={this.addToPlaylist.bind(this)} />
       </div>

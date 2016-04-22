@@ -3,9 +3,9 @@ var decoder = new StringDecoder('utf8');
 //spawn a child process
 var spawn = require('child_process').spawn;
 
-exports.getUser = function (user, callback) {
-  var process = spawn('python', ['./database/UserController.py', 'GET', +user.fbID]);
-  var fetchedUser = null;
+exports.getAllUsers = function (user, callback) {
+  var process = spawn('python', ['./database/UserController.py', 'GET']);
+  var fetchedUsers = null;
   process.stdout.on('data', function (data) {
     if (data) {
       var splitData = decoder.write(data).split('\n');
@@ -18,6 +18,10 @@ exports.getUser = function (user, callback) {
       fetchedUser = userData;
     }
   });
+
+  process.stderr.on('data' function (data) {
+    console.log(decoder.write(data));
+  })
   
   process.on('close', function(data) {
     callback(null, fetchedUser);

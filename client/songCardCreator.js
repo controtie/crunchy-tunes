@@ -9,6 +9,7 @@ const cardCreator = (object) => {
       songTitle: object.title,
       apiSource: object.apiSource,
       id: object.id,
+      duration: object.duration
     };
   }
   return 'apiSource not matched';

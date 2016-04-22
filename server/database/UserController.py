@@ -7,7 +7,6 @@ conn = sqlite3.connect('test.db')
 
 
 if sys.argv[1] == 'GET':
-  fbID   = sys.argv[2]
   stmt   = 'SELECT * from Users'
   cursor = conn.execute(stmt);
   for row in cursor:

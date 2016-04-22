@@ -35,7 +35,19 @@ io.on('connection', function(socket){
     users[socket.conn.id] = user;
     io.emit('users', clientsToArray(socket.conn.server.clients));
 
-    // Users.getAllUsers()
+    Users.postUser(user, function (err, data) {
+      if (err) {
+        console.log('posting User failed')
+      } else {
+        console.log('posting User success')
+      }
+
+      Users.getAllUsers(function (data) {
+        console.log('Fetched Users:');
+        console.log(data);
+      })
+    });
+    
   });
 
   socket.on('playlistLookup', function(user) {

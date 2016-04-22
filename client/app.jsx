@@ -48,7 +48,8 @@ class App extends React.Component {
   }
 
   pickUser(user) {
-    this.setState({ listeningTo: user })
+    this.setState({ listeningTo: user });
+    socket.emit('playlistLookup', user);
   }
 
   pageChange() {
@@ -62,6 +63,7 @@ class App extends React.Component {
   login(user) {
     this.setState({loggedIn: true, user: user});
     socket.emit('login', user);
+    socket.emit('playlistLookup', user);
   }
 
   playNewSong(track) {

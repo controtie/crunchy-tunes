@@ -53,7 +53,7 @@ class App extends React.Component {
     if (playlist.length === 1) {
       this.playNewSong(track);
     }
-    if (this.state.listeningTo !== null) {
+    if (this.state.listeningTo === null) {
       socket.emit('playlist', playlist);
     }
   }
@@ -62,7 +62,7 @@ class App extends React.Component {
     var newList = this.state.playlist.slice();
     newList.splice(songIndex, 1);
     this.setState({ playlist: newList });
-    if (this.state.listeningTo !== null) {
+    if (this.state.listeningTo === null) {
       socket.emit('playlist', newList);
     }
   }

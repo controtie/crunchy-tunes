@@ -96,7 +96,7 @@ exports.postPlaylist = function (playlist, callback) {
       }
       contentIDs = JSON.stringify(contentIDs);
 
-      //post Playlist to database
+      //post Playlist to datab
       var postPlaylistWorker = spawn('python', ['./database/PlaylistController.py', 'POST', playlist.userID, contentIDs]);
       var success = false;
 

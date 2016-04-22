@@ -53,8 +53,10 @@ io.on('connection', function(socket){
     })
 
     fs.readFile(__dirname+'/playlists/'+users[socket.conn.id].fbID+'.json', 'utf8', function(err, playlist) {
-      playlist = JSON.parse(playlist);
-      socket.emit('playlist', playlist);
+      if (playlist) {
+        playlist = JSON.parse(playlist);
+        socket.emit('playlist', playlist);
+      }
     })
   });
 

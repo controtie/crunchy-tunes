@@ -41,7 +41,6 @@ class App extends React.Component {
     console.log('next song!');
     console.log(this.state.playlist[this.state.playIndex]);
     this.playNewSong(this.state.playlist[this.state.playIndex]);
-
   }
 
   addToPlaylist(track) {

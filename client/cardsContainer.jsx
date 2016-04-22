@@ -17,7 +17,7 @@ class CardsContainer extends React.Component {
 
   componentDidMount() {
     const self = this;
-    queryAll({ query: 'Baby Beluga',
+    queryAll({ query: 'fingathing',
       })
       .then((results) => {
         self.setState({

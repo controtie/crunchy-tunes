@@ -21,7 +21,7 @@ class SongPlayer extends React.Component {
 
   componentDidUpdate() {
     this.reloadPlayer()
-    console.log('loaded');
+    console.log('track uploaded');
   }
 
 

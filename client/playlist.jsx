@@ -22,7 +22,7 @@ const Playlist = ({ playlist, handleClick, remove }) => {
       />
       <CardActions>
         <Button label="Remove" onClick={() => remove(index)} />
-        <Button label="Play" onClick={() => handleClick(track)} />
+        <Button label="Play" onClick={() => handleClick(track, index)} />
       </CardActions>
     </Card>
   );

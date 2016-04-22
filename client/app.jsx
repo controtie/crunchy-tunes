@@ -78,10 +78,10 @@ class App extends React.Component {
   pageChange() {
     if (this.state.page === 'tracks') {
       this.setState({page: 'users'});
-      socket.emit('playlistLookup', this.state.user);
-      this.setState({listeningTo: null})
     } else {
       this.setState({page: 'tracks'});
+      socket.emit('playlistLookup', this.state.user);
+      this.setState({listeningTo: null})
     }
   }
 

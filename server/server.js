@@ -52,6 +52,17 @@ io.on('connection', function(socket){
       }
     })
 
+    fs.readFile(__dirname+'/playlists/'+users[socket.conn.id].fbID+'.json', 'utf8', function(err, playlist) {
+      playlist = JSON.parse(playlist);
+      socket.emit('playlist', playlist);
+    })
+  });
+
+  socket.on('playlist', function(playlist) {
+    fs.writeFile(__dirname+'/playlists/'+users[socket.conn.id].fbID+'.json', JSON.stringify(playlist), function(err, response) {
+      if (err) {console.log(err)}
+      console.log('playlist update - ', users[socket.conn.id].fbID);
+    })
   });
 
   socket.on('disconnect', function(){

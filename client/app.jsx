@@ -56,8 +56,10 @@ class App extends React.Component {
   }
 
   removeFromPlaylist(songIndex) {
-    var newList = this.state.playlist.splice(songIndex, 1);
-    this.setState({playlist: newList});
+    console.log('index of removed song', songIndex);
+    var newList = this.state.playlist.slice();
+    newList.splice(songIndex, 1);
+    this.setState({ playlist: newList });
   }
 
   playNewSong(track) {

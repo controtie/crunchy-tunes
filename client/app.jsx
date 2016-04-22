@@ -34,6 +34,13 @@ class App extends React.Component {
     this.setState({
       playlist: playlist
     });
+    socket.emit('playlist', this.state.playlist);
+  }
+
+  removeFromPlaylist(songIndex) {
+    var newList = this.state.playlist.slice(songIndex, 1);
+    this.setState({playlist: newList});
+    socket.emit('playlist', this.state.playlist);
   }
 
   pickUser(user) {

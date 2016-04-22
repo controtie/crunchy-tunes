@@ -24,10 +24,16 @@ class SongPlayer extends React.Component {
     console.log('loaded');
   }
 
+  songEnded () {
+    console.log('this song ended');
+    console.log('this song REALLY ENDED');
+    console.log('stop waiting');
+  }
+
   render() {
     return (
       <div className="songPlayer">
-        <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no">
+        <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no" onEnded="console.log('hi')">
           <source id="currentsong" src={this.props.track} type="audio/wav"></source>
         </audio>
       </div>

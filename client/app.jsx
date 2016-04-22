@@ -15,12 +15,14 @@ class App extends React.Component {
     this.state = {
       currentTrack: '',
       playlist: [],
+      playIndex: 0,
       loggedIn: false,
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
       page: 'tracks'
     };
+
     socket.on('users', function(users) {
       console.log('new users - ', users);
       this.setState({users: users})
@@ -37,6 +39,13 @@ class App extends React.Component {
     this.setState({
       playlist: playlist
     });
+    console.log('this.state.playlist', this.state.playlist);
+    console.log('playlist', playlist);
+    if(playlist.length === 1) {
+      console.log('this.state.playlist', this.state.playlist);
+      console.log('playlist', playlist);
+      this.playNewSong(playlist['0']);
+    }
     socket.emit('playlist', this.state.playlist);
   }
 

@@ -10,6 +10,7 @@
     client_id: '74ab5bce668cfc75adb7e4b1853f201b'
   });
 
+  
 
   var updateSource = function (link) { 
     var audio = document.getElementById('player');
@@ -18,6 +19,7 @@
     audio.load();
     audio.play();
   };
+
 
   var songLink;
 
@@ -57,6 +59,19 @@
   <source id="currentsong" src='' type="audio/wav">
 </audio>
 
+
+
+
+<script> 
+
+var audio = document.getElementById('player');
+
+audio.onended = function () {
+  console.log('this stopped playing');
+}
+
+
+</script>
 <br>
 <hr>
 <hr>

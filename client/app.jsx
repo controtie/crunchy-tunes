@@ -34,12 +34,21 @@ class App extends React.Component {
     SC.initialize({client_id: '74ab5bce668cfc75adb7e4b1853f201b'});
   }
 
+  playThisSongFromPlaylist (track, index) {
+    console.log(track.songTitle);
+    var playIndex = index + 1
+    this.setState({
+      playIndex: playIndex
+    });
+    this.playNewSong(track);
+  } 
+
   whenSongEnds () {
     this.setState({
       playIndex: this.state.playIndex + 1
     });
     console.log('next song!');
-    console.log(this.state.playlist[this.state.playIndex]);
+    console.log(this.state.playlist[this.state.playIndex].songTitle);
     this.playNewSong(this.state.playlist[this.state.playIndex]);
   }
 
@@ -135,7 +144,7 @@ class App extends React.Component {
           {pageLayout}
           </div>
           <div className="col-md-4">
-            <Playlist playlist={this.state.playlist} handleClick={this.playNewSong.bind(this)} remove={this.removeFromPlaylist.bind(this)} />
+            <Playlist playlist={this.state.playlist} handleClick={this.playThisSongFromPlaylist.bind(this)} remove={this.removeFromPlaylist.bind(this)} />
           </div>
       </div>
     );

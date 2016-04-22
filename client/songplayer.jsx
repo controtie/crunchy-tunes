@@ -33,7 +33,7 @@ class SongPlayer extends React.Component {
   render() {
     return (
       <div className="songPlayer">
-        <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no" onEnded="console.log('hi')">
+        <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no" onended="console.log('hi')">
           <source id="currentsong" src={this.props.track} type="audio/wav"></source>
         </audio>
       </div>

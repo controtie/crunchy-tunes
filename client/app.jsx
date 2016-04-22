@@ -25,6 +25,9 @@ class App extends React.Component {
       console.log('new users - ', users);
       this.setState({users: users})
     }.bind(this));
+    socket.on('playlist', function(playlist) {
+      this.setState({playlist: playlist});
+    }.bind(this));
     SC.initialize({client_id: '74ab5bce668cfc75adb7e4b1853f201b'});
   }
 

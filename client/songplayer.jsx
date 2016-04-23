@@ -28,7 +28,7 @@ class SongPlayer extends React.Component {
   render() {
     return (
       <div className="songPlayer">
-        <h5>{this.props.track.songTitle.substring(0, 30)}</h5>
+        <h5>{this.props.track.songTitle}</h5>
         <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no" onEnded={this.props.songEnd}>
           <source id="currentsong" src={this.props.track.url} type="audio/wav"></source>
         </audio>

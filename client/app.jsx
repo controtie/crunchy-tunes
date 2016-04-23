@@ -126,7 +126,7 @@ class App extends React.Component {
     if (this.state.loggedIn === false) {
       return (
         <div className='login'>
-          <LandingPage login={this.login.bind(this)} />
+          <LandingPage login={this.login.bind(this)} isLoggedIn={this.state.loggedIn} />
         </div> 
       );
     }
@@ -152,6 +152,7 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer autoplay={this.state.autoplay} track={this.state.currentTrack} songEnd={this.nextSong.bind(this)} />
+            <Facebook login={this.props.login} isLoggedIn={this.state.loggedIn}/>
             <Button label={this.state.changePageButton} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
 
             <img src={this.state.user.avatar} height="89" width="89"></img> 

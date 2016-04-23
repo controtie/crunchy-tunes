@@ -8,7 +8,7 @@ class Facebook extends React.Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.state = {
-      loggedin: false,
+      loggedin: this.props.isLoggedIn,
     };
   }
 
@@ -105,11 +105,11 @@ class Facebook extends React.Component {
   render() {
     if (this.state.loggedin) {
       return (
-        <div><Button label="Log Out!" style={{color: 'white' }} onClick={this.handleLogout} /></div>
+        <div><Button label="Log Out" style={{color: 'white' }} onClick={this.handleLogout} /></div>
       );
     } else {
       return (
-        <div><Button label="Log In!" style={{color: 'white' }} onClick={this.handleLogin} /></div>
+        <div><Button label="Log In" style={{color: 'white' }} onClick={this.handleLogin} /></div>
       );
     }
   }

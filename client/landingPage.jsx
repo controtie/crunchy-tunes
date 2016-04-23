@@ -14,7 +14,7 @@ class LandingPage extends React.Component {
       <div className="login">
         <div className="landing-page">
           <h1> Simon Sings~&#9834; </h1>
-          <Facebook login={this.props.login}/>
+          <Facebook login={this.props.login} isLoggedIn={this.props.isLoggedIn}/>
         </div>
       </div>
     );

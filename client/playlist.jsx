@@ -17,12 +17,10 @@ const Playlist = ({ playlist, currentSongIndex, handleClick, remove }) => {
             avatar="https://c1.staticflickr.com/9/8082/8292777643_65090144e9.jpg"
             title={track.creator}
             subtitle={track.songTitle}
-            duration={track.duration}
-            track={track.contentId}
       />
       <CardActions>
-        <Button label="Remove" className={ClassNames(style['remove'])} onClick={() => remove(index)} />
-        <Button label="Play" className={ClassNames(style['play'])} onClick={() => handleClick(track, index) } />
+        <Button label="Remove" onClick={() => remove(index)} />
+        <Button label="Play" onClick={() => handleClick(track, index, true)} />
       </CardActions>
     </Card>
   );

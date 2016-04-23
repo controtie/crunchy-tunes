@@ -20,7 +20,8 @@ class App extends React.Component {
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
-      page: 'tracks'
+      page: 'tracks',
+      autoplay: false
     };
 
     socket.on('users', function(users) {
@@ -28,28 +29,18 @@ class App extends React.Component {
       this.setState({users: users})
     }.bind(this));
     socket.on('playlist', function(playlist) {
-      this.setState({playlist: playlist});
+      this.setState({
+        playlist: playlist,
+        playIndex: 0,
+        currentTrack: playlist[0]
+      });
     }.bind(this));
 
-    SC.initialize({client_id: '74ab5bce668cfc75adb7e4b1853f201b'});
   }
 
-  playThisSongFromPlaylist (track, index) {
-    console.log(track.songTitle);
-    var playIndex = index + 1
-    this.setState({
-      playIndex: playIndex
-    });
-    this.playNewSong(track);
-  } 
-
-  whenSongEnds () {
-    this.setState({
-      playIndex: this.state.playIndex + 1
-    });
-    console.log('next song!');
-    console.log(this.state.playlist[this.state.playIndex].songTitle);
-    this.playNewSong(this.state.playlist[this.state.playIndex], this.state.playIndex);
+  nextSong () {
+    var newIndex = this.state.playIndex + 1;
+    this.playNewSong(this.state.playlist[newIndex], newIndex, true);
   }
 
   addToPlaylist(track) {
@@ -58,11 +49,11 @@ class App extends React.Component {
     this.setState({
       playlist: playlist
     });
-    if (playlist.length === 1) {
-      this.playNewSong(track);
-    }
     if (this.state.listeningTo === null) {
       socket.emit('playlist', playlist);
+    }
+    if (playlist.length === 1) {
+      this.playNewSong(playlist[0], 0, false);
     }
   }
 
@@ -99,16 +90,17 @@ class App extends React.Component {
     socket.emit('playlistLookup', user);
   }
 
-  playNewSong(track, index) {
-    this.setState({
-      playIndex: index,
-    });
+  playNewSong(track, index, autoplay) {
     var thing = this;
     SC.stream('/tracks/' + track.id )
     .then(function(player){
       songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
         track.url = song.http_mp3_128_url;
-        thing.setState({currentTrack: track});
+        thing.setState({
+          currentTrack: track,
+          playIndex: index,
+          autoplay: autoplay
+        });
       })
       .fail(function(error) {
         console.log( "audio player error - ", error );
@@ -139,7 +131,7 @@ class App extends React.Component {
                 icon: 'audiotrack',
               }]}
             />
-            <SongPlayer track={this.state.currentTrack} songEnd={this.whenSongEnds.bind(this)} />
+            <SongPlayer autoplay={this.state.autoplay} track={this.state.currentTrack} songEnd={this.nextSong.bind(this)} />
             <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="89" width="89"></img> 

@@ -24,6 +24,16 @@ if sys.argv[1] == 'POST':
   stmt   = 'INSERT INTO Users (fbID, name, avatar) VALUES ({},"{}","{}")'.format(fbID, name, avatar);
   conn.execute(stmt);
   conn.commit()
-  print 'success'
+  print 'post success'
+  sys.stdout.flush();
+  conn.close()
+
+if sys.argv[1] == 'PUT':
+  online = sys.argv[2]
+  fbID   = sys.argv[3]
+  stmt   = 'UPDATE Users SET online = {} where fbID = {}'.format(online, fbID);
+  conn.execute(stmt)
+  conn.commit()
+  print 'put success'
   sys.stdout.flush();
   conn.close()

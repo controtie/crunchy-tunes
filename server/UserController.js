@@ -64,3 +64,28 @@ exports.postUser = function (user, callback) {
   });
 }
 
+exports.putUser = function (user, callback) {
+  var process = spawn('python', ['./database/UserController.py', 'PUT', +user.online, +user.fbID]);
+  var success = false;
+  process.stdout.on('data', function (data) {
+    if (data) {
+      success = true;
+    }
+    console.log(decoder.write(data));
+  });
+
+  process.stderr.on('data', function (data) {
+    console.log('error @ ./database/UserController.py');
+    console.log('called @ ./UserController.js: 79');
+    console.log(decoder.write(data));
+  });
+
+  process.on('close', function(data) {
+    if (success) {
+      callback(null, 'user put success!');
+    } else {
+      callback('postUser failed at UserController.js: 43', success);
+    }
+  });
+}
+

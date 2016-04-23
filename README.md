@@ -1,31 +1,40 @@
-# crunchy-tunes
-A music player and aggregator built on the Spotify, YouTube and Soundcloud APIs.
+# Simon-sings
+A music playlist sharing project built on top of crunchy-tunes.
 
-## Team
-
-  - __Product Owner__: Kevin Meraz
-  - __Scrum Master__: Brandon Ramirez
-  - __Development Team Members__: Nemo Baker, Ashwin Ravi, Brandon Ramirez, Kevin Meraz
 
 ## Table of Contents
 
+1. [Team](#team)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
+1. [Installing Dependencies](#installing-dependencies)
 1. [Contributing](#contributing)
+
+## Team
+
+Josh Wentworth
+Sofia Berlin
+Wilson Yu
+Dylan Tran
 
 ## Usage
 
-Checkout the app in action [here](http://crunchytunes.com)!
+To set up database:
+run python /server/db.py
 
-## Requirements
+To run server:
+npm run dev-start 
+node server/server.js
 
-Node v5.8
+ if this doesn't work,
+ run node server.js inside the server directory.
 
-## Development
+## Stack
+
+React
+Express
+SQLite3
+Node
 
 ### Installing Dependencies
 
@@ -45,45 +54,11 @@ This script uses web pack to bundle your js and jsx files (with source maps), wa
 
 Navigate your browser to localhost: 8080 to view the app.
 
-
-
 'webpack --watch'
 
 
 ```
 
-### Current Build Health [![Build Status](https://travis-ci.org/ImmaculateHangover/crunchy-tunes.svg?branch=master)](https://travis-ci.org/ImmaculateHangover/crunchy-tunes)
-View the build [history]](https://travis-ci.org/ImmaculateHangover/crunchy-tunes/builds)
-
-### Roadmap
-
-View the project roadmap [here](https://waffle.io/ImmaculateHangover/crunchy-tunes)
-[![Stories in 'Backlog'](https://badge.waffle.io/ImmaculateHangover/crunchy-tunes.svg?label=Backlog&title=Backlog)](http://waffle.io/ImmaculateHangover/crunchy-tunes)
-[![Stories in 'Ready'](https://badge.waffle.io/ImmaculateHangover/crunchy-tunes.svg?label=Ready&title=Ready)](http://waffle.io/ImmaculateHangover/crunchy-tunes)
-[![Stories in 'In Progress'](https://badge.waffle.io/ImmaculateHangover/crunchy-tunes.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/ImmaculateHangover/crunchy-tunes)
-
-
-### Progress
-
-[![Throughput Graph](https://graphs.waffle.io/ImmaculateHangover/crunchy-tunes/throughput.svg)](https://waffle.io/ImmaculateHangover/crunchy-tunes/metrics)
-
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
-
-To set up database:
-run python /server/db.py
-
-to delete database:
-delete /server/test.db
-
-To run server:
-npm run dev-start 
-node server/server.js
- if this doesn't work,
- run sudo node server.js inside the server.js directory.
-
-
-
-

@@ -27,7 +27,7 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
     }});
 
     let everyone = allUsers.map(function(user) {
-      if (user.fbID && +user.fbID !== +currentUser.fbID && user.online !== 1) {
+      if (user.fbID && +user.fbID !== +currentUser.fbID) {
         return <Card onClick={() => pickUser(user)}
           key={user.fbID}
           className={ClassNames(style['card'])}
@@ -50,11 +50,8 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
   return (
     <div className="cardsContainer">
       <div className="col-md-8">
-        <h2>Online</h2>
-        {cards}
-      </div>
-      <div className="col-md-8">
-        <h2>Everyone</h2>
+        <h2>Users</h2>
+        <p>{users.length} users online</p>
         {everyone}
       </div>
     </div>

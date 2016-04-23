@@ -47,12 +47,12 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
       </Card>
     }});
   return (
-    <div className="cardsContainer">
-      <div className="col-md-8">
+    <div className="usersContainer">
+      <div className="col-md-8" className="cardsContainer">
         <h2>Online</h2><br></br>
         {cards}<br></br>
       </div>
-      <div className="col-md-8">
+      <div className="col-md-8" className="cardsContainer">
         <h2>Everyone</h2><br></br>
         {everyone}
       </div>

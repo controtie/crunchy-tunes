@@ -23,7 +23,8 @@ exports.getAllUsers = function (callback) {
           ID: userData[i][0],
           fbID: userData[i][1],
           avatar: userData[i][2],
-          name: userData[i][3]
+          online: userData[i][3],
+          name: userData[i][4]
         }
         formattedUserData.push(user);
       }
@@ -84,7 +85,7 @@ exports.putUser = function (user, callback) {
     if (success) {
       callback(null, 'user put success!');
     } else {
-      callback('postUser failed at UserController.js: 43', success);
+      callback('putUser failed at UserController.js: 43', success);
     }
   });
 }

@@ -1,6 +1,7 @@
 node_modules/
 gitSpy/*
 server/playlists/
+server/test.db
 
 ### node etc ###
 

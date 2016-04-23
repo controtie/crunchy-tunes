@@ -22,8 +22,8 @@ exports.getAllUsers = function (callback) {
         var user = {
           ID: userData[i][0],
           fbID: userData[i][1],
-          name: userData[i][2],
-          avatar: userData[i][3]
+          avatar: userData[i][2]
+          name: userData[i][3],
         }
         formattedUserData.push(user);
       }

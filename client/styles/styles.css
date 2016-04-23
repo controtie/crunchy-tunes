@@ -7,6 +7,20 @@
 } 
 
 
+.login {
+  display: block;
+  background-color: #ccc;
+  he
+}
+
+.landing-page {
+  display: block;
+  text-align: center;
+  background-color: #ccc;
+  margin: 0 auto;
+}
+
+
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;

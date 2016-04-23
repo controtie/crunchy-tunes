@@ -48,10 +48,14 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
     }});
   return (
     <div className="cardsContainer">
-      <h2>Online</h2>
-      {cards}
-      <h2>Everyone</h2>
-      {everyone}
+      <div className="col-md-8">
+        <h2>Online</h2><br></br>
+        {cards}<br></br>
+      </div>
+      <div className="col-md-8">
+        <h2>Everyone</h2><br></br>
+        {everyone}
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import ClassNames from 'classnames';
 import style from './styles/toolbox-theme';
 
 const Playlist = ({ playlist, currentSongIndex, handleClick, remove }) => {
+
   var cards = playlist.map( function (track, index) {
 
     var updateTitle = track.songTitle;

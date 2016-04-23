@@ -20,14 +20,15 @@ class App extends React.Component {
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
-      page: 'tracks',
       autoplay: false
+      page: 'users'
     };
 
     socket.on('users', function(users) {
       console.log('new users - ', users);
       this.setState({users: users})
     }.bind(this));
+    
     socket.on('playlist', function(playlist) {
       this.setState({
         playlist: playlist,

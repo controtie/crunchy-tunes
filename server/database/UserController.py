@@ -14,6 +14,7 @@ if sys.argv[1] == 'GET':
     print row[1]
     print row[2]
     print row[3]
+    print row[4]
   conn.close()
   sys.stdout.flush();
 

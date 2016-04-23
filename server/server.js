@@ -41,14 +41,15 @@ io.on('connection', function(socket){
       if (err) {
         console.log('posting User failed', err)
         Users.getAllUsers(function (data) {
+          console.log(data);
           socket.emit('allUsers', data);
         })
       } else {
         Users.putUser(user, function(err, data) {
           if (err) {console.log('login update error ', err)};
           Users.getAllUsers(function (data) {
-            io.emit('allUsers', data);
             console.log(data);
+            io.emit('allUsers', data);
           })
         });
       }

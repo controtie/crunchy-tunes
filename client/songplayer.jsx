@@ -9,11 +9,13 @@ class SongPlayer extends React.Component {
   reloadPlayer() { 
     var audio = document.getElementById('player');
     audio.load();
-    audio.play();
+    if(this.props.autoplay){
+      audio.play();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.track.url === this.props.track.url) {
+    if (nextProps.track.url === this.props.track.url && nextProps.autoplay === this.props.autoplay) {
       return false;
     }
     return true;
@@ -22,7 +24,6 @@ class SongPlayer extends React.Component {
   componentDidUpdate() {
     this.reloadPlayer()
   }
-
 
   render() {
     return (

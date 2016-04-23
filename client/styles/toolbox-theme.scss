@@ -28,7 +28,7 @@ $card-font-size: $font-size-small !default;
 
 
 .card-title {
-  font-size: $font-size-small;
+  font-size: 14px;
   font-family: $preferred-font;
   font-weight: 300;
   padding-left: 15px;
@@ -98,3 +98,10 @@ $card-font-size: $font-size-small !default;
     color: #29a329 !important;
 }
 
+.playlistCard {
+  font-size: 24px;
+}
+
+.playlistCard p {
+  margin: 0
+}

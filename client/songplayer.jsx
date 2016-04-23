@@ -26,9 +26,19 @@ class SongPlayer extends React.Component {
   }
 
   render() {
+
+    var updateTitle = this.props.track.songTitle;
+    if(this.props.track.songTitle === undefined) {
+      updateTitle = '';
+    } else {  
+      if(this.props.track.songTitle.length > 40) {
+        updateTitle = this.props.track.songTitle.substring(0,39) + "...";
+      }
+    }
+
     return (
       <div className="songPlayer">
-        <h5>{this.props.track.songTitle}</h5>
+        <h5>{updateTitle}</h5>
         <audio id='player' controls="controls" width="500" height="80" scrolling="no" frameBorder="no" onEnded={this.props.songEnd}>
           <source id="currentsong" src={this.props.track.url} type="audio/wav"></source>
         </audio>

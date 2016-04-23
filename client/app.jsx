@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTrack: {},
+      currentTrack: {url: ''},
       playlist: [],
       playIndex: null,
       loggedIn: false,

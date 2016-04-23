@@ -102,6 +102,10 @@ class App extends React.Component {
     socket.emit('playlistLookup', user);
   }
 
+  getPlaylist() {
+    socket.emit('playlistLookup', this.state.user);
+  }
+
   playNewSong(track, index, autoplay) {
     var thing = this;
     SC.stream('/tracks/' + track.id )
@@ -152,10 +156,9 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer autoplay={this.state.autoplay} track={this.state.currentTrack} songEnd={this.nextSong.bind(this)} />
-            <Facebook login={this.props.login} isLoggedIn={this.state.loggedIn}/>
+            <Facebook login={this.props.login} isLoggedIn={this.state.loggedIn} />
             <Button label={this.state.changePageButton} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
-
-            <img src={this.state.user.avatar} height="89" width="89"></img> 
+            <img src={this.state.user.avatar} height="89" width="89" onClick={this.getPlaylist.bind(this)} ></img> 
           </AppBar>
           <div className="col-md-8">
           {pageLayout}

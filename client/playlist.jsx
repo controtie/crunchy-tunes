@@ -19,8 +19,8 @@ const Playlist = ({ playlist, currentSongIndex, handleClick, remove }) => {
             subtitle={track.songTitle}
       />
       <CardActions>
-        <Button label="Remove" onClick={() => remove(index)} />
-        <Button label="Play" onClick={() => handleClick(track, index, true)} />
+        <Button label="Remove" className={ClassNames(style['remove'])} onClick={() => remove(index)} />
+        <Button label="Play"  className={ClassNames(style['play'])} onClick={() => handleClick(track, index, true)} />
       </CardActions>
     </Card>
   );

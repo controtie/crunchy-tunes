@@ -2,6 +2,7 @@ const cardCreator = (object) => {
   const key = object.apiSource;
 
   if (key === 'SoundCloud') {
+
     return {
       imagePath: object.artwork_url,
       contentId: object.id,

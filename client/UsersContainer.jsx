@@ -49,7 +49,7 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
 
   return (
     <div className="usersContainer">
-      <div className="col-md-8">
+      <div>
         <h2>Users</h2>
         <p>{users.length} Users Online</p>
         <div className="usersCardsContainer">

@@ -27,12 +27,12 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
     }});
 
     let everyone = allUsers.map(function(user) {
-      if (user.fbID !== currentUser.fbID && !user.online) {
-      return <Card onClick={() => pickUser(user)}
-        key={user.fbID}
-        className={ClassNames(style['card'])}
-        style={{ width: '200px', height: '250px', margin: '15px' }}
-      >
+      if (user.fbID && +user.fbID !== +currentUser.fbID && !user.online) {
+        return <Card onClick={() => pickUser(user)}
+          key={user.fbID}
+          className={ClassNames(style['card'])}
+          style={{ width: '200px', height: '250px', margin: '15px' }}
+        >
         <div className={ClassNames(style['image-container'])}>
           <CardMedia
             aspectRatio="square"

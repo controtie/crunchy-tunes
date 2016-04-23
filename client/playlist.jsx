@@ -10,12 +10,10 @@ const Playlist = ({ playlist, currentSongIndex, handleClick, remove }) => {
       className={ClassNames(style['card'])}
       className={currentSongIndex === index ? ClassNames(style['current-card']) : null}
       key={track.contentId}
-      style={{ width: '350px', height: '200px', margin: '15px' }}
+      style={{ width: '350px', height: '80px', margin: '4px' }}
     >
       <CardTitle
-            className={ClassNames(style['source-logo-for-playlist'])}
-            avatar="https://c1.staticflickr.com/9/8082/8292777643_65090144e9.jpg"
-            title={track.creator}
+            className={ClassNames(style['playlistCard'])}
             subtitle={track.songTitle}
       />
       <CardActions>

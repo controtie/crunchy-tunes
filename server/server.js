@@ -35,6 +35,8 @@ io.on('connection', function(socket){
     users[socket.conn.id] = user;
     io.emit('users', clientsToArray(socket.conn.server.clients));
 
+    user.online = true;
+
     Users.postUser(user, function (err, data) {
       if (err) {
         console.log('posting User failed', err)
@@ -42,9 +44,12 @@ io.on('connection', function(socket){
           socket.emit('allUsers', data);
         })
       } else {
-        Users.getAllUsers(function (data) {
-          io.emit('allUsers', data);
-        })
+        Users.putUser(user, function(err, data) {
+          if (err) {console.log(err)};
+          Users.getAllUsers(function (data) {
+            io.emit('allUsers', data);
+          })
+        });
       }
     });
   });
@@ -69,7 +74,16 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    var user = users[socket.conn.id];
+    user.online = false;
+    Users.putUser(user, function(err, data) {
+      if (err) {console.log(err)};
+      Users.getAllUsers(function (data) {
+        io.emit('allUsers', data);
+      })
+    });
     delete users[socket.conn.id];
+    io.emit('users', clientsToArray(socket.conn.server.clients));
   });
 });
 

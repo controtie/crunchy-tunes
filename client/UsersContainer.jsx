@@ -4,7 +4,7 @@ import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox
 import ClassNames from 'classnames';
 import style from './styles/toolbox-theme';
 
-const UsersContainer = ({ currentUser, users, pickUser }) => {
+const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
   let cards = users.map(function(user) {
     if (user.fbID && user.fbID !== currentUser.fbID) {
       return <Card onClick={() => pickUser(user)}
@@ -25,9 +25,33 @@ const UsersContainer = ({ currentUser, users, pickUser }) => {
         </div>
       </Card>
     }});
+
+    let everyone = allUsers.map(function(user) {
+      if (user.fbID && user.fbID !== currentUser.fbID) {
+      return <Card onClick={() => pickUser(user)}
+        key={user.fbID}
+        className={ClassNames(style['card'])}
+        style={{ width: '200px', height: '250px', margin: '15px' }}
+      >
+        <div className={ClassNames(style['image-container'])}>
+          <CardMedia
+            aspectRatio="square"
+            image={user.avatar}
+          />
+        </div>
+        <div className={ClassNames(style['card-title'])}>
+        {user.name}
+        </div>
+        <div className={ClassNames(style['card-overlay'])}>
+        </div>
+      </Card>
+    }});
   return (
     <div className="cardsContainer">
+      <h2>Online</h2>
       {cards}
+      <h2>Everyone</h2>
+      {everyone}
     </div>
   );
 };

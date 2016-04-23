@@ -20,8 +20,9 @@ class App extends React.Component {
       user: {avatar: './assets/default_user-884fcb1a70325256218e78500533affb.jpg'},
       listeningTo: null,
       users: [],
-      autoplay: false
-      page: 'users'
+      autoplay: false,
+      page: 'users',
+      allUsers: []
     };
 
     socket.on('users', function(users) {
@@ -37,6 +38,9 @@ class App extends React.Component {
       });
     }.bind(this));
 
+    socket.on('allUsers', function(allUsers) {
+      this.setState({allUsers: allUsers});
+    }.bind(this));
   }
 
   nextSong () {
@@ -118,7 +122,7 @@ class App extends React.Component {
     } else {
       pageLayout = <div>
         <nav className="navBar"></nav>
-        <UsersContainer currentUser={this.state.user} users={this.state.users} pickUser={this.pickUser.bind(this)} />
+        <UsersContainer allUsers={this.state.allUsers} currentUser={this.state.user} users={this.state.users} pickUser={this.pickUser.bind(this)} />
       </div>
     }
     return (

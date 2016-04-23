@@ -28,7 +28,6 @@ class App extends React.Component {
     };
 
     socket.on('users', function(users) {
-      console.log('new users - ', users);
       this.setState({users: users})
     }.bind(this));
     
@@ -124,7 +123,6 @@ class App extends React.Component {
   render() {
     var pageLayout;
     if (this.state.loggedIn === false) {
-      console.log('not logged in');
       return (
         <div className='login'>
           <LandingPage login={this.login.bind(this)} />
@@ -146,7 +144,7 @@ class App extends React.Component {
           <AppBar className="appBar" >
             <Navigation type="horizontal" style= {{ width: '700px' }} actions={[
               {
-                label: 'Crunchy Tunes',
+                label: 'Simon Sings ♪♬♪♩♪♪',
                 raised: true,
                 accent: true,
                 icon: 'audiotrack',

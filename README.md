@@ -75,7 +75,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 To set up database:
 run python /server/db.py
 
+to delete database:
+delete /server/test.db
+
 To run server:
 npm run dev-start 
 node server/server.js
+ if this doesn't work,
+ run sudo node server.js inside the server.js directory.
+
+
+
 

@@ -38,13 +38,15 @@ io.on('connection', function(socket){
     Users.postUser(user, function (err, data) {
       if (err) {
         console.log('posting User failed', err)
+        Users.getAllUsers(function (data) {
+          socket.emit('allUsers', data);
+        })
+      } else {
+        Users.getAllUsers(function (data) {
+          io.emit('allUsers', data);
+        })
       }
-
-      Users.getAllUsers(function (data) {
-        socket.emit('allUsers', data);
-      })
     });
-    
   });
 
   socket.on('playlistLookup', function(user) {
@@ -52,6 +54,8 @@ io.on('connection', function(socket){
       if (playlist) {
         playlist = JSON.parse(playlist);
         socket.emit('playlist', playlist);
+      } else {
+        socket.emit('playlist', []);
       }
     })
   });

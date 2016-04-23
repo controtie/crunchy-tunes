@@ -35,7 +35,7 @@ class App extends React.Component {
       this.setState({
         playlist: playlist,
         playIndex: 0,
-        currentTrack: playlist[0]
+        currentTrack: playlist[0] || {url: ''}
       });
     }.bind(this));
 
@@ -84,9 +84,11 @@ class App extends React.Component {
     if (this.state.page === 'tracks') {
       this.setState({page: 'users'});
     } else {
-      this.setState({page: 'tracks'});
+      this.setState({
+        page: 'tracks',
+        listeningTo: null
+      });
       socket.emit('playlistLookup', this.state.user);
-      this.setState({listeningTo: null})
     }
   }
 

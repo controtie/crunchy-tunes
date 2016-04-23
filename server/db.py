@@ -10,6 +10,7 @@ conn.execute('''CREATE TABLE Users
   (ID INTEGER PRIMARY KEY,
   fbID INT NOT NULL UNIQUE, 
   avatar VARCHAR(255),
+  online INTEGER,
   name TEXT NOT NULL);
   ''');
 

@@ -11,7 +11,13 @@ var Playlists = require('./PlaylistController.js')
 // })
 
 
-Users.getAllUsers(function (err, user) {
+// Users.getAllUsers(function (err, user) {
+//     console.log(user);
+//   });
+
+testUser = {fbID: 1157060897720933, online: 1};
+
+Users.putUser(testUser, function (err, user) {
     console.log(user);
   });
 

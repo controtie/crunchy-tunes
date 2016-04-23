@@ -55,7 +55,7 @@ class Facebook extends React.Component {
       var user = {
         name: response.name,
         fbID: response.id,
-        avatar: response.picture.data.url
+        avatar: '//graph.facebook.com/' + response.id + '/picture?type=large'
       }
       this.props.login(user);
     }.bind(this));

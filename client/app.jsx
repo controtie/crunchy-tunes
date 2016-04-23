@@ -23,6 +23,7 @@ class App extends React.Component {
       users: [],
       autoplay: false,
       page: 'users',
+      changePageButton: 'tracks',
       allUsers: []
     };
 
@@ -82,10 +83,14 @@ class App extends React.Component {
 
   pageChange() {
     if (this.state.page === 'tracks') {
-      this.setState({page: 'users'});
+      this.setState({
+        page: 'users',
+        changePageButton: 'tracks'
+      });
     } else {
       this.setState({
         page: 'tracks',
+        changePageButton: 'users',
         listeningTo: null
       });
       socket.emit('playlistLookup', this.state.user);
@@ -149,7 +154,7 @@ class App extends React.Component {
             />
             <SongPlayer autoplay={this.state.autoplay} track={this.state.currentTrack} songEnd={this.nextSong.bind(this)} />
             <Facebook login={this.login.bind(this)}/>
-            <Button label={this.state.page} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
+            <Button label={this.state.changePageButton} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="89" width="89"></img> 
           </AppBar>
           <div className="col-md-8">

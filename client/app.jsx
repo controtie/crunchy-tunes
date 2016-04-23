@@ -1,4 +1,5 @@
 import React from 'react';
+import LandingPage from './landingPage.jsx'
 import SongPlayer from './songplayer.jsx';
 import CardsContainer from './cardsContainer.jsx';
 import UsersContainer from './UsersContainer.jsx';
@@ -105,6 +106,14 @@ class App extends React.Component {
 
   render() {
     var pageLayout;
+    if (this.state.loggedIn === false) {
+      console.log('not logged in');
+      return (
+        <div className='login'>
+          <LandingPage login={this.login.bind(this)} />
+        </div> 
+      );
+    }
     if (this.state.page === 'tracks' && this.state.loggedIn === true) {
       pageLayout = <div>
         <CardsContainer tracks = {this.state.tracks} handleCardPlay={this.addToPlaylist.bind(this)} />

@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
     return (
       <div className="login">
         <div className="landing-page">
-          <h1> LandingPage!</h1>
+          <h1> Simon Sings~&#9834; </h1>
           <Facebook login={this.props.login}/>
         </div>
       </div>

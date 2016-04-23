@@ -12,12 +12,13 @@
 }
 
 .login {
+  margin-top: 250px;
   display: block;
   background-color: #ccc;
-  he
 }
 
 .landing-page {
+  padding-top: 20px;
   display: block;
   text-align: center;
   background-color: #ccc;

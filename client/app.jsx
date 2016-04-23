@@ -136,7 +136,6 @@ class App extends React.Component {
               }]}
             />
             <SongPlayer track = {this.state.currentTrack} songEnd={this.whenSongEnds.bind(this)} />
-            <Facebook login={this.login.bind(this)}/>
             <Button label={this.state.page} style={{color: 'white', margin: '0 200px 0 0'}} onClick={this.pageChange.bind(this)} />
             <img src={this.state.user.avatar} height="89" width="89"></img> 
           </AppBar>

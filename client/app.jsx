@@ -106,6 +106,7 @@ class App extends React.Component {
     var thing = this;
     SC.stream('/tracks/' + track.id )
     .then(function(player){
+      console.log('updating player and state');
       songLink = $.get(player.options.streamUrlsEndpoint, function(song) {
         track.url = song.http_mp3_128_url;
         thing.setState({

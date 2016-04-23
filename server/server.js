@@ -37,14 +37,11 @@ io.on('connection', function(socket){
 
     Users.postUser(user, function (err, data) {
       if (err) {
-        console.log('posting User failed')
-      } else {
-        console.log('posting User success')
+        console.log('posting User failed', err)
       }
 
       Users.getAllUsers(function (data) {
-        console.log('Fetched Users:');
-        console.log(data);
+        socket.emit('allUsers', data);
       })
     });
     

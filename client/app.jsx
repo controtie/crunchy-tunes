@@ -10,6 +10,8 @@ import Facebook from './facebook.jsx';
 import _ from 'underscore';
 import Button from 'react-toolbox/lib/button';
 import queryAll from './queryAll.js';
+import keys from '../config/keys.js';
+import SC from 'soundcloud';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +29,10 @@ class App extends React.Component {
       changePageButton: 'tracks',
       allUsers: []
     };
+
+    SC.initialize({
+      client_id: process.env.SOUNDCLOUD_ID || keys.soundCloud,
+    });
 
     socket.on('users', function(users) {
       this.setState({users: users})

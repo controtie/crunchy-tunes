@@ -13,11 +13,12 @@ exports.getAllUsers = function (callback) {
       var splitData = decoder.write(data).split('\n');
       var userData = [];
       for (var i = 0; i < splitData.length; i++) {
-        if (splitData[i] < 100 && splitData[i] !== '') {
+        if (i%5 === 0 && splitData[i] !== '') {
           userData.push([])
         }
         userData[userData.length-1].push(splitData[i]);
       }
+      console.log('USER DATA!!!!!!!', userData);
       for (var i = 0; i < userData.length; i++) {
         var user = {
           ID: userData[i][0],

@@ -48,6 +48,7 @@ io.on('connection', function(socket){
           if (err) {console.log('login update error ', err)};
           Users.getAllUsers(function (data) {
             io.emit('allUsers', data);
+            console.log(data);
           })
         });
       }
@@ -80,6 +81,7 @@ io.on('connection', function(socket){
       if (err) {console.log('diconnect update error ', err)};
       Users.getAllUsers(function (data) {
         io.emit('allUsers', data);
+        console.log(data);
       })
     });
     delete users[socket.conn.id];

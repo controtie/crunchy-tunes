@@ -27,7 +27,7 @@ const UsersContainer = ({ allUsers, currentUser, users, pickUser }) => {
     }});
 
     let everyone = allUsers.map(function(user) {
-      if (user.fbID && +user.fbID !== +currentUser.fbID && !user.online) {
+      if (user.fbID && +user.fbID !== +currentUser.fbID && user.online !== 1) {
         return <Card onClick={() => pickUser(user)}
           key={user.fbID}
           className={ClassNames(style['card'])}

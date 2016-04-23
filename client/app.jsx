@@ -9,6 +9,7 @@ import Navigation from 'react-toolbox/lib/navigation';
 import Facebook from './facebook.jsx';
 import _ from 'underscore';
 import Button from 'react-toolbox/lib/button';
+import queryAll from './queryAll.js';
 
 class App extends React.Component {
   constructor(props) {
